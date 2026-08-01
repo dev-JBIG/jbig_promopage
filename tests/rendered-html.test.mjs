@@ -94,9 +94,20 @@ test("server-renders the JBIG recruitment landing page", async () => {
     /<meta(?=[^>]*property="og:url")(?=[^>]*content="https:\/\/jbig\.co\.kr\/recruit")[^>]*>/i,
   );
 
-  for (const section of ["hero", "about", "curriculum", "awards", "fit", "faq", "apply"]) {
+  for (const section of ["hero", "about", "curriculum", "testimonials", "awards", "fit", "faq", "apply"]) {
     assert.match(html, new RegExp(`data-recruit-section="${section}"`));
   }
+
+  const sectionOrder = ["curriculum", "testimonials", "awards", "fit", "faq"];
+  for (let index = 1; index < sectionOrder.length; index += 1) {
+    const previous = sectionOrder[index - 1];
+    const current = sectionOrder[index];
+    assert.ok(
+      html.indexOf(`data-recruit-section="${previous}"`) < html.indexOf(`data-recruit-section="${current}"`),
+      `${previous} should render before ${current}`,
+    );
+  }
+  assert.equal((html.match(/class="testimonial-story"/g) ?? []).length, 3);
 
   for (const phrase of [
     "JBIG가 무슨",
@@ -109,8 +120,8 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "코드 과제",
     "06–08",
     "딥러닝",
-    "실제 현실 데이터로 배우는 빅데이터 분석과정",
-    "제대로 경험해보는 캐글-like INSIGHT X ML 분석대회",
+    "현실 데이터로 배우는 빅데이터 분석과정",
+    "제대로 경험해보는 DATA X ML 분석대회",
     "개념 이해부터, 실제로 적용해보는 프로젝트까지.",
     "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
     "8주 일정 자세히 보기",
@@ -122,6 +133,14 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "46",
     "제주·AWS 글로벌 스페이스 챌린지 해커톤",
     "교육부장관상",
+    "배운 것은,",
+    "어디까지 이어졌을까요.",
+    "수료자들이 직접 들려주는",
+    "JBIG 이후의 변화.",
+    "기수 입력",
+    "주요 활동 입력",
+    "한 줄 장점이 이곳에 들어갑니다.",
+    "500자 이내의 간결한 후기가 이곳에 들어갑니다.",
   ]) {
     assert.equal(html.includes(phrase), true, `missing recruitment copy: ${phrase}`);
   }
@@ -142,6 +161,16 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "모델을 평가하는 법",
     "WEEKLY FLOW",
     "8주를 세 개의 흐름으로",
+    "JBIG RECRUIT",
+    "WE ARE JBIG",
+    "WHAT WE DO",
+    "8 WEEK CURRICULUM",
+    "WEEK BY WEEK",
+    "AFTER JBIG",
+    "AWARDS & RESULTS",
+    "RECOGNIZED",
+    "YOU MIGHT FIT",
+    "JOIN THE NEXT JBIG",
   ]) {
     assert.equal(html.toLowerCase().includes(phrase.toLowerCase()), false, `unexpected recruitment copy: ${phrase}`);
   }
@@ -197,10 +226,13 @@ test("builds a self-contained nginx bundle for /recruit", async () => {
 });
 
 test("keeps recruitment visuals lightweight, responsive, and reduced-motion aware", async () => {
-  const [recruitCss, recruitPage, curriculumShowcase] = await Promise.all([
+  const [recruitCss, recruitPage, awardsRibbon, curriculumShowcase, testimonialsSection, recruitContent] = await Promise.all([
     readFile(new URL("../app/recruit/recruit.css", import.meta.url), "utf8"),
     readFile(new URL("../app/recruit/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/recruit/AwardsRibbon.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/recruit/CurriculumShowcase.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/recruit/TestimonialsSection.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/recruit/content.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(recruitCss, /prefers-reduced-motion:\s*reduce/);
@@ -215,6 +247,38 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(recruitCss, /\.award-ribbon-viewport\s*\{[^}]*max-width:\s*100%/s);
   assert.match(recruitPage, /<AwardsRibbon\s*\/>/);
   assert.match(recruitPage, /<CurriculumShowcase\s*\/>/);
+  assert.match(recruitPage, /<TestimonialsSection\s*\/>/);
+  assert.ok(
+    recruitPage.indexOf("<TestimonialsSection />") < recruitPage.indexOf("<AwardsRibbon />"),
+    "testimonials should follow curriculum and precede awards",
+  );
+  assert.doesNotMatch(`${recruitPage}\n${awardsRibbon}\n${testimonialsSection}`, /section-kicker|hero-kicker/);
+  assert.doesNotMatch(curriculumShowcase, /activePhase\.label/);
+  assert.doesNotMatch(recruitContent, /DATA ANALYSIS|PERFORMANCE ARENA|DEEP LEARNING|BUILD STUDIO/);
+  assert.match(recruitCss, /\.testimonial-list/);
+  assert.match(recruitCss, /\.testimonial-story\s*\{[^}]*grid-template-columns:\s*repeat\(12,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(recruitCss, /\.testimonial-story-number\s*\{[^}]*grid-column:\s*span\s+1/s);
+  assert.match(recruitCss, /\.testimonial-author\s*\{[^}]*grid-column:\s*span\s+3/s);
+  assert.match(recruitCss, /\.testimonial-story-copy\s*\{[^}]*grid-column:\s*span\s+8/s);
+  assert.match(recruitCss, /\.testimonial-profile-image\s*\{[^}]*width:\s*clamp\(112px,[^,]+,\s*120px\)[^}]*aspect-ratio:\s*4\s*\/\s*5/s);
+  assert.match(recruitCss, /\.testimonial-story blockquote\s*\{[^}]*font-size:\s*clamp\(38px,[^,]+,\s*48px\)/s);
+  assert.match(recruitCss, /\.testimonial-story-copy\s*>\s*p\s*\{[^}]*max-width:\s*720px/s);
+  assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.testimonial-story-copy\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s);
+  assert.doesNotMatch(recruitCss, /\.testimonial-story\s*\{[^}]*box-shadow\s*:/s);
+  assert.doesNotMatch(recruitCss, /\.testimonial-story\s*\{[^}]*background\s*:/s);
+  assert.doesNotMatch(recruitCss, /\.testimonial-card/);
+  assert.doesNotMatch(recruitCss, /\.testimonial-photo|\.testimonial-photo-placeholder/);
+  assert.doesNotMatch(recruitCss, /(?:-webkit-)?line-clamp/);
+  assert.match(testimonialsSection, /testimonial\.profileImage\s*\?/);
+  assert.match(testimonialsSection, /<Image[^>]*className="testimonial-profile-image"/s);
+  assert.doesNotMatch(testimonialsSection, /placeholder|기본 아바타|활동 사진 예정/i);
+  assert.ok(
+    testimonialsSection.indexOf('className="testimonial-story-number"')
+      < testimonialsSection.indexOf('className="testimonial-author"')
+      && testimonialsSection.indexOf('className="testimonial-author"')
+      < testimonialsSection.indexOf('className="testimonial-story-copy"'),
+    "testimonial document order should be number, author, then full review",
+  );
   assert.match(recruitCss, /fox-mascots\.webp/);
   assert.match(recruitCss, /\.phase-flow\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
   assert.match(recruitCss, /@keyframes\s+phaseModalFluidIn/);

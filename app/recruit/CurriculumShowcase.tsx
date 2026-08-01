@@ -148,7 +148,6 @@ export default function CurriculumShowcase() {
             <header className="phase-modal-header">
               <span className="phase-modal-range"><small>WEEK</small><strong>{activePhase.range}</strong></span>
               <div>
-                <p>{activePhase.label}</p>
                 <strong>{activePhase.title}</strong>
               </div>
             </header>

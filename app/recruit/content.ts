@@ -10,23 +10,20 @@ export const activityAreas = ["데이터 사이언스", "딥러닝", "머신러�
 export const curriculumPhases = [
   {
     range: "01–04",
-    label: "DATA ANALYSIS",
     title: "데이터 분석",
     companion: "코드 과제",
-    description: "실제 현실 데이터로 배우는 빅데이터 분석과정",
+    description: "현실 데이터로 배우는 빅데이터 분석과정",
     tone: "analysis",
   },
   {
     range: "05",
-    label: "PERFORMANCE ARENA",
     title: "JBIG DATA ARENA",
     companion: null,
-    description: "제대로 경험해보는 캐글-like INSIGHT X ML 분석대회",
+    description: "제대로 경험해보는 DATA X ML 분석대회",
     tone: "challenge",
   },
   {
     range: "06–08",
-    label: "DEEP LEARNING",
     title: "딥러닝",
     companion: null,
     description: "개념 이해부터, 실제로 적용해보는 프로젝트까지.",
@@ -34,7 +31,6 @@ export const curriculumPhases = [
   },
   {
     range: "01–08",
-    label: "BUILD STUDIO",
     title: "JBIG SOLUTION STUDIO",
     companion: null,
     description: "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
@@ -100,6 +96,43 @@ export const curriculumWeeks = [
     seminar: "발표와 질의응답",
   },
 ] as const;
+
+export type TestimonialItem = {
+  id: string;
+  profileImage?: string;
+  name: string;
+  cohort: string;
+  mainActivity: string;
+  highlight: string;
+  review: string;
+};
+
+export const testimonialItems: readonly TestimonialItem[] = [
+  {
+    id: "member-01",
+    name: "이름 입력",
+    cohort: "기수 입력",
+    mainActivity: "주요 활동 입력",
+    highlight: "한 줄 장점이 이곳에 들어갑니다.",
+    review: "500자 이내의 간결한 후기가 이곳에 들어갑니다.",
+  },
+  {
+    id: "member-02",
+    name: "이름 입력",
+    cohort: "기수 입력",
+    mainActivity: "주요 활동 입력",
+    highlight: "한 줄 장점 입력",
+    review: "500자 이내 후기 입력",
+  },
+  {
+    id: "member-03",
+    name: "이름 입력",
+    cohort: "기수 입력",
+    mainActivity: "주요 활동 입력",
+    highlight: "한 줄 장점 입력",
+    review: "500자 이내 후기 입력",
+  },
+];
 
 export const fitStatements = [
   "궁금한 건 직접 해봐야 직성이 풀리는 사람",

@@ -53,7 +53,6 @@ export default function AwardsRibbon() {
     <section className="awards-section" id="awards" data-recruit-section="awards">
       <div className="recruit-section awards-intro">
         <header className="awards-heading">
-          <div className="section-kicker"><span>03</span> AWARDS &amp; RESULTS</div>
           <h2>도전은,<br />기록으로 남습니다.</h2>
         </header>
         <div className="awards-summary">

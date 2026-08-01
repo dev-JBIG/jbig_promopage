@@ -10,6 +10,7 @@ import {
 } from "./content";
 import AwardsRibbon from "./AwardsRibbon";
 import CurriculumShowcase from "./CurriculumShowcase";
+import TestimonialsSection from "./TestimonialsSection";
 import "./recruit.css";
 
 const title = "JBIG 모집 | 호기심이 팀이 되는 곳";
@@ -56,6 +57,7 @@ export default function RecruitPage() {
         <div className="recruit-nav-links">
           <a href="#about">JBIG 소개</a>
           <a href="#curriculum">8주 교안</a>
+          <a href="#testimonials">동아리원 후기</a>
           <a href="#awards">수상경력</a>
           <a href="#fit">잘 맞는 사람</a>
         </div>
@@ -64,7 +66,6 @@ export default function RecruitPage() {
 
       <main id="recruit-main" tabIndex={-1}>
         <section className="recruit-hero" id="hero" data-recruit-section="hero">
-          <p className="hero-kicker">JBIG RECRUIT</p>
           <LiquidLogo />
           <div className="recruit-hero-copy">
             <h1>호기심이<br />팀이 되는 곳.</h1>
@@ -77,7 +78,6 @@ export default function RecruitPage() {
         <section className="about-section" id="about" data-recruit-section="about">
           <div className="recruit-section about-inner">
             <header className="about-heading">
-              <div className="section-kicker"><span>01</span> WE ARE JBIG</div>
               <h2>JBIG가 무슨<br />약자인가요?</h2>
             </header>
 
@@ -92,7 +92,6 @@ export default function RecruitPage() {
 
             <div className="activity-block">
               <div className="activity-heading">
-                <p>WHAT WE DO</p>
                 <h3>우리가 하는 활동</h3>
               </div>
               <div className="activity-list">
@@ -108,7 +107,6 @@ export default function RecruitPage() {
         <section className="curriculum-section" id="curriculum" data-recruit-section="curriculum">
           <div className="recruit-section curriculum-inner">
             <header className="curriculum-heading">
-              <div className="section-kicker"><span>02</span> 8 WEEK CURRICULUM</div>
               <h2>배운 것은 바로,<br />해보는 쪽으로.</h2>
             </header>
 
@@ -124,7 +122,6 @@ export default function RecruitPage() {
               </summary>
               <div className="curriculum-detail-panel">
                 <header>
-                  <p>WEEK BY WEEK</p>
                   <h3>질문에서 결과물까지,<br />매주 한 걸음씩.</h3>
                 </header>
                 <ol className="week-detail-grid">
@@ -148,12 +145,13 @@ export default function RecruitPage() {
           </div>
         </section>
 
+        <TestimonialsSection />
+
         <AwardsRibbon />
 
         <section className="fit-section" id="fit" data-recruit-section="fit">
           <div className="recruit-section fit-inner">
             <div className="fit-copy">
-              <div className="section-kicker"><span>04</span> YOU MIGHT FIT</div>
               <h2>이런 당신을<br />기다리고 있어요.</h2>
             </div>
             <ol className="fit-list">
@@ -167,7 +165,6 @@ export default function RecruitPage() {
 
         <section className="recruit-section faq-section" id="faq" data-recruit-section="faq">
           <div className="faq-heading">
-            <div className="section-kicker"><span>05</span> FAQ</div>
             <h2>모집 전에<br />궁금한 것들.</h2>
           </div>
           <div className="faq-list">
@@ -182,7 +179,6 @@ export default function RecruitPage() {
 
         <section className="apply-section" id="apply" data-recruit-section="apply">
           <div className="apply-glow" aria-hidden="true" />
-          <p>JOIN THE NEXT JBIG</p>
           <h2>다음 이야기를<br />함께 만들어요.</h2>
           <span>모집 일정과 지원 대상이 확정되면 이곳에서 안내합니다.</span>
           {recruitmentConfig.applicationUrl ? (
