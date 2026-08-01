@@ -1,3 +1,21 @@
+export const awardsContent = {
+  heading: ["도전은,", "기록으로 남습니다."],
+  description: ["해커톤부터 AI 경진대회, 논문과 창업까지.", "JBIG의 도전은 결과로 이어져 왔습니다."],
+  summaryAriaLabel: "수상경력 요약",
+  recordLabel: "RECORDS",
+  yearsLabel: "YEARS",
+  motionToggleLabel: "움직임 멈추기",
+  ribbonAriaLabel: {
+    fromYearSuffix: "년부터",
+    toYearSuffix: "년까지",
+    subject: "JBIG 수상경력",
+  },
+  latestCaption: "NOW",
+  archiveCaption: "ARCHIVE",
+  plaqueBrand: "JBIG",
+  sealLabel: "AWARD",
+} as const;
+
 export type AwardRecord = {
   title: string;
   result: string;

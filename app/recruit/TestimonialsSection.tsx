@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { testimonialItems, type TestimonialItem } from "./content";
+import { testimonialItems, testimonialsContent, type TestimonialItem } from "./content";
 
 function TestimonialStory({ testimonial, index }: { testimonial: TestimonialItem; index: number }) {
   return (
@@ -11,7 +11,7 @@ function TestimonialStory({ testimonial, index }: { testimonial: TestimonialItem
           <Image
             className="testimonial-profile-image"
             src={testimonial.profileImage}
-            alt={`${testimonial.name} 프로필`}
+            alt={`${testimonial.name} ${testimonialsContent.profileAltSuffix}`}
             width={120}
             height={150}
           />
@@ -37,12 +37,12 @@ export default function TestimonialsSection() {
       <div className="recruit-section testimonials-inner">
         <header className="testimonial-heading">
           <div>
-            <h2>배운 것은,<br />어디까지 이어졌을까요.</h2>
+            <h2>{testimonialsContent.heading[0]}<br />{testimonialsContent.heading[1]}</h2>
           </div>
-          <p>수료자들이 직접 들려주는<br />JBIG 이후의 변화.</p>
+          <p>{testimonialsContent.description[0]}<br />{testimonialsContent.description[1]}</p>
         </header>
 
-        <div className="testimonial-list" aria-label="JBIG 동아리원 후기">
+        <div className="testimonial-list" aria-label={testimonialsContent.listAriaLabel}>
           {testimonialItems.map((testimonial, index) => (
             <TestimonialStory key={testimonial.id} testimonial={testimonial} index={index} />
           ))}

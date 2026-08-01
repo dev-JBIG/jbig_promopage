@@ -232,7 +232,7 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
     readFile(new URL("../app/recruit/AwardsRibbon.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/recruit/CurriculumShowcase.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/recruit/TestimonialsSection.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../app/recruit/content.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/recruit/content/curriculum.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(recruitCss, /prefers-reduced-motion:\s*reduce/);
@@ -292,8 +292,11 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(curriculumShowcase, /role="dialog"/);
   assert.match(curriculumShowcase, /aria-modal="true"/);
   assert.match(curriculumShowcase, /event\.key === "Escape"/);
-  assert.match(curriculumShowcase, /curriculumWeeks\.slice\(0, 4\)/);
-  assert.match(curriculumShowcase, /curriculumWeeks\.slice\(5, 8\)/);
+  assert.match(curriculumShowcase, /phase\.detail\.weekIds/);
+  assert.match(curriculumShowcase, /curriculumWeeks\.filter/);
+  assert.doesNotMatch(curriculumShowcase, /const (?:modalHeadlines|modalNotes|studioSteps)\b/);
+  assert.match(recruitContent, /headline: "분석의 기본을, 직접 해보며 익힙니다\."/);
+  assert.match(recruitContent, /headline: "분석을 끝내지 않고, 작동하는 결과물로\."/);
   assert.match(curriculumShowcase, /className="project-ascent"/);
   assert.doesNotMatch(recruitPage, /chart-heading|WEEKLY FLOW|8주를 세 개의 흐름으로/);
   assert.doesNotMatch(recruitCss, /\.chart-heading/);
@@ -307,8 +310,14 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
 
   await Promise.all([
     access(new URL("../public/recruit/fox-mascots.webp", import.meta.url)),
+    access(new URL("../app/recruit/content/index.ts", import.meta.url)),
+    access(new URL("../app/recruit/content/site.ts", import.meta.url)),
+    access(new URL("../app/recruit/content/testimonials.ts", import.meta.url)),
+    access(new URL("../app/recruit/content/awards.ts", import.meta.url)),
     assert.rejects(access(new URL("../app/recruit/RecruitHero.tsx", import.meta.url))),
     assert.rejects(access(new URL("../app/recruit/CurriculumTimeline.tsx", import.meta.url))),
+    assert.rejects(access(new URL("../app/recruit/content.ts", import.meta.url))),
+    assert.rejects(access(new URL("../app/recruit/awards.ts", import.meta.url))),
   ]);
 });
 
@@ -374,7 +383,7 @@ test("keeps awards demos CSS-only, pausable, and reduced-motion aware", async ()
   const [awardsPage, awardsCss, awardsData] = await Promise.all([
     readFile(new URL("../app/recruit/awards-lab/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../app/recruit/awards-lab/awards-lab.css", import.meta.url), "utf8"),
-    readFile(new URL("../app/recruit/awards.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/recruit/content/awards.ts", import.meta.url), "utf8"),
   ]);
 
   assert.match(awardsCss, /@keyframes\s+awardRail/);

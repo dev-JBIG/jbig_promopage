@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { allAwards, awardsByYear, awardYears, featuredAwards, type AwardRecord } from "../awards";
+import { allAwards, awardsByYear, awardYears, featuredAwards, type AwardRecord } from "../content";
 import "./awards-lab.css";
 
 export const metadata: Metadata = {

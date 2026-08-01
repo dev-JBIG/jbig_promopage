@@ -3,36 +3,17 @@
 import type { CSSProperties, MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { curriculumPhases, curriculumWeeks } from "./content";
+import {
+  curriculumContent,
+  curriculumPhases,
+  curriculumWeeks,
+  type CurriculumPhase,
+  type CurriculumPhaseTone,
+} from "./content";
 
-type CurriculumPhase = (typeof curriculumPhases)[number];
-type PhaseTone = CurriculumPhase["tone"];
-
-const modalHeadlines: Record<PhaseTone, string> = {
-  analysis: "분석의 기본을, 직접 해보며 익힙니다.",
-  challenge: "점수를 올린 이유까지, 설명할 수 있게.",
-  "deep-learning": "개념을 보고, 직접 작동시킵니다.",
-  studio: "분석을 끝내지 않고, 작동하는 결과물로.",
-};
-
-const modalNotes: Record<PhaseTone, string> = {
-  analysis: "공통 데이터와 누적형 코드 과제로 분석의 흐름을 만듭니다.",
-  challenge: "리더보드 경쟁을 검증과 회고까지 이어가는 실전 분석전",
-  "deep-learning": "핵심 개념을 예제와 선택형 실습으로 연결합니다.",
-  studio: "팀의 질문을 프로토타입과 발표로 완성하는 제작 스튜디오",
-};
-
-const studioSteps = [
-  ["01", "문제 정의"],
-  ["02", "데이터"],
-  ["03", "프로토타입"],
-  ["04", "데모데이"],
-] as const;
-
-function getSchedule(tone: PhaseTone) {
-  if (tone === "analysis") return curriculumWeeks.slice(0, 4);
-  if (tone === "deep-learning") return curriculumWeeks.slice(5, 8);
-  return [];
+function getSchedule(phase: CurriculumPhase) {
+  const weekIds: readonly string[] = phase.detail.weekIds;
+  return curriculumWeeks.filter((week) => weekIds.includes(week.week));
 }
 
 function getWeekFocus(week: (typeof curriculumWeeks)[number]) {
@@ -41,7 +22,7 @@ function getWeekFocus(week: (typeof curriculumWeeks)[number]) {
 }
 
 export default function CurriculumShowcase() {
-  const [activeTone, setActiveTone] = useState<PhaseTone | null>(null);
+  const [activeTone, setActiveTone] = useState<CurriculumPhaseTone | null>(null);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -71,7 +52,7 @@ export default function CurriculumShowcase() {
     };
   }, [activePhase]);
 
-  const openPhase = (tone: PhaseTone, event: MouseEvent<HTMLButtonElement>) => {
+  const openPhase = (tone: CurriculumPhaseTone, event: MouseEvent<HTMLButtonElement>) => {
     const rect = event.currentTarget.getBoundingClientRect();
     triggerRef.current = event.currentTarget;
     setOrigin({
@@ -81,19 +62,19 @@ export default function CurriculumShowcase() {
     setActiveTone(tone);
   };
 
-  const schedule = activePhase ? getSchedule(activePhase.tone) : [];
+  const schedule = activePhase ? getSchedule(activePhase) : [];
   const titleId = activePhase ? `phase-modal-title-${activePhase.tone}` : undefined;
   const noteId = activePhase ? `phase-modal-note-${activePhase.tone}` : undefined;
 
   return (
     <>
-      <ol className="phase-flow" aria-label="JBIG 8주 활동 구성">
+      <ol className="phase-flow" aria-label={curriculumContent.flowAriaLabel}>
         {curriculumPhases.map((item) => (
           <li className="phase-item" data-curriculum-phase={item.tone} key={`${item.range}-${item.tone}`}>
             <article className={`phase-card phase-${item.tone}`}>
               <div className="phase-overview">
                 <span className="phase-range">
-                  <small>WEEK</small>
+                  <small>{curriculumContent.weekLabel}</small>
                   <strong>{item.range}</strong>
                 </span>
                 <span className="phase-copy">
@@ -105,7 +86,7 @@ export default function CurriculumShowcase() {
                   type="button"
                   data-phase-open={item.tone}
                   aria-haspopup="dialog"
-                  aria-label={`${item.title} 자세히 보기`}
+                  aria-label={`${item.title} ${curriculumContent.expandAriaLabelSuffix}`}
                   onClick={(event) => openPhase(item.tone, event)}
                 >
                   <i className="phase-expand-icon" aria-hidden="true" />
@@ -139,29 +120,29 @@ export default function CurriculumShowcase() {
               className="phase-modal-close"
               type="button"
               ref={closeButtonRef}
-              aria-label={`${activePhase.title} 상세 내용 닫기`}
+              aria-label={`${activePhase.title} ${curriculumContent.closeAriaLabelSuffix}`}
               onClick={() => setActiveTone(null)}
             >
               <i aria-hidden="true" />
             </button>
 
             <header className="phase-modal-header">
-              <span className="phase-modal-range"><small>WEEK</small><strong>{activePhase.range}</strong></span>
+              <span className="phase-modal-range"><small>{curriculumContent.weekLabel}</small><strong>{activePhase.range}</strong></span>
               <div>
                 <strong>{activePhase.title}</strong>
               </div>
             </header>
 
             <div className="phase-modal-copy">
-              <h3 id={titleId}>{modalHeadlines[activePhase.tone]}</h3>
-              <p id={noteId}>{modalNotes[activePhase.tone]}</p>
+              <h3 id={titleId}>{activePhase.detail.headline}</h3>
+              <p id={noteId}>{activePhase.detail.note}</p>
             </div>
 
             {schedule.length > 0 ? (
-              <ol className="phase-modal-schedule" aria-label={`${activePhase.title} 주차별 핵심 일정`}>
+              <ol className="phase-modal-schedule" aria-label={`${activePhase.title} ${curriculumContent.scheduleAriaLabelSuffix}`}>
                 {schedule.map((week) => (
                   <li key={week.week}>
-                    <span>WEEK <b>{week.week}</b></span>
+                    <span>{curriculumContent.weekLabel} <b>{week.week}</b></span>
                     <strong>{week.question}</strong>
                     <p>{getWeekFocus(week)}</p>
                   </li>
@@ -169,9 +150,9 @@ export default function CurriculumShowcase() {
               </ol>
             ) : null}
 
-            {activePhase.tone === "studio" ? (
-              <ol className="project-ascent" aria-label="JBIG SOLUTION STUDIO 등산형 진행 단계">
-                {studioSteps.map(([step, label]) => (
+            {activePhase.detail.steps.length > 0 ? (
+              <ol className="project-ascent" aria-label={curriculumContent.studioStepsAriaLabel}>
+                {activePhase.detail.steps.map(([step, label]) => (
                   <li key={step}>
                     <span><b>{step}</b><strong>{label}</strong></span>
                     <i aria-hidden="true" />
