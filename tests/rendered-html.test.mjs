@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { access, readFile } from "node:fs/promises";
+import { access, readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 async function render(pathname = "/") {
@@ -176,6 +176,24 @@ test("server-renders the JBIG recruitment landing page", async () => {
   assert.match(html, /<details[^>]*open/i);
   assert.doesNotMatch(html, /<svg\b/i);
   assert.doesNotMatch(html, /aria-live=/i);
+});
+
+test("builds a self-contained nginx bundle for /recruit", async () => {
+  const [html, assetFiles] = await Promise.all([
+    readFile(new URL("../dist/deploy/index.html", import.meta.url), "utf8"),
+    readdir(new URL("../dist/deploy/assets/", import.meta.url)),
+    access(new URL("../dist/deploy/favicon.svg", import.meta.url)),
+    access(new URL("../dist/deploy/fox-mascots.webp", import.meta.url)),
+    access(new URL("../dist/deploy/recruit.rsc", import.meta.url)),
+  ]);
+
+  assert.match(html, /<title>JBIG 모집 \| 호기심이 팀이 되는 곳<\/title>/i);
+  assert.match(html, /(?:href|src)="\/recruit\/assets\//i);
+  assert.match(html, /href="\/recruit\/favicon\.svg"/i);
+  assert.doesNotMatch(html, /(?:href|src)="\/assets\//i);
+  assert.doesNotMatch(html, /href="\/recruit\/recruit(?:[\/#?]|\")/i);
+  assert.equal(assetFiles.some((name) => name.endsWith(".css")), true);
+  assert.equal(assetFiles.some((name) => name.endsWith(".js")), true);
 });
 
 test("keeps recruitment visuals lightweight, responsive, and reduced-motion aware", async () => {

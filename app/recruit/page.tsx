@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import type { CSSProperties } from "react";
-import Link from "next/link";
 import {
   acronymItems,
   activityAreas,
@@ -53,7 +52,7 @@ export default function RecruitPage() {
       <a className="recruit-skip-link" href="#recruit-main">본문으로 바로가기</a>
 
       <nav className="recruit-nav" aria-label="JBIG 모집 페이지 주요 메뉴">
-        <Link className="recruit-brand" href="/" aria-label="JBIG 홈으로 이동">JBIG</Link>
+        <a className="recruit-brand" href="https://jbig.co.kr/" aria-label="JBIG 홈으로 이동">JBIG</a>
         <div className="recruit-nav-links">
           <a href="#about">JBIG 소개</a>
           <a href="#curriculum">8주 교안</a>
@@ -200,7 +199,7 @@ export default function RecruitPage() {
       </main>
 
       <footer className="recruit-footer">
-        <Link href="/">JBIG</Link>
+        <a href="https://jbig.co.kr/">JBIG</a>
         <span>Jeonbuk National University · Data Analysis Club</span>
       </footer>
     </div>

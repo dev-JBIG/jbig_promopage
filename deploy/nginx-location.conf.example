@@ -1,0 +1,23 @@
+# Add these locations inside the existing jbig.co.kr HTTPS server block.
+# Replace /home/ubuntu when DEPLOY_USER has a different home directory.
+
+location = /recruit {
+    alias /home/ubuntu/volume/jbig_promopage/current/index.html;
+    add_header Cache-Control "no-cache";
+}
+
+location = /recruit.rsc {
+    alias /home/ubuntu/volume/jbig_promopage/current/recruit.rsc;
+    add_header Cache-Control "no-cache";
+}
+
+location ^~ /recruit/assets/ {
+    alias /home/ubuntu/volume/jbig_promopage/current/assets/;
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+}
+
+location ^~ /recruit/ {
+    alias /home/ubuntu/volume/jbig_promopage/current/;
+    index index.html;
+}

@@ -1,0 +1,106 @@
+name: Promotional Site CI/CD
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build promotional site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.13.0"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Build and test
+        run: npm test
+
+      - name: Upload deployment bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: jbig-promopage-static
+          path: dist/deploy
+          if-no-files-found: error
+
+  deploy:
+    name: Deploy promotional site
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: jbig-promopage-production
+      cancel-in-progress: false
+    steps:
+      - name: Download deployment bundle
+        uses: actions/download-artifact@v4
+        with:
+          name: jbig-promopage-static
+          path: deploy-bundle
+
+      - name: Create deployment archive
+        run: tar czf jbig-promopage-build.tar.gz -C deploy-bundle .
+
+      - name: Upload archive to server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: jbig-promopage-build.tar.gz
+          target: /tmp/
+
+      - name: Activate new release
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            set -eu
+
+            DEPLOY_PATH_VALUE="${{ secrets.DEPLOY_PATH }}"
+            case "$DEPLOY_PATH_VALUE" in
+              ""|/*|*..*)
+                echo "DEPLOY_PATH must be a non-empty relative path without '..'."
+                exit 1
+                ;;
+            esac
+
+            APP_BASE="$HOME/$DEPLOY_PATH_VALUE"
+            RELEASES_DIR="$APP_BASE/releases"
+            TIMESTAMP=$(date +%Y%m%d%H%M%S)
+            NEW_RELEASE="$RELEASES_DIR/$TIMESTAMP"
+
+            mkdir -p "$NEW_RELEASE"
+            tar xzf /tmp/jbig-promopage-build.tar.gz -C "$NEW_RELEASE"
+            rm -f /tmp/jbig-promopage-build.tar.gz
+
+            test -f "$NEW_RELEASE/index.html"
+            test -f "$NEW_RELEASE/recruit.rsc"
+            test -f "$NEW_RELEASE/favicon.svg"
+            test -f "$NEW_RELEASE/fox-mascots.webp"
+            test -d "$NEW_RELEASE/assets"
+
+            ln -sfn "$NEW_RELEASE" "$APP_BASE/current"
+
+            cd "$RELEASES_DIR"
+            ls -1dt -- */ 2>/dev/null | tail -n +6 | xargs -r rm -rf --
+
+            echo "Deployed promotional site: $TIMESTAMP"

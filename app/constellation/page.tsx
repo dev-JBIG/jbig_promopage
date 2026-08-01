@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import type { CSSProperties, PointerEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import "./constellation.css";
@@ -155,7 +156,7 @@ export default function ConstellationPage() {
           <div className="constellation-glow glow-b" aria-hidden="true" />
 
           <nav className="constellation-nav" aria-label="JBIG SVG 실험 페이지">
-            <a href="/" className="constellation-brand"><b>J</b><span>JBIG</span></a>
+            <Link href="/" className="constellation-brand"><b>J</b><span>JBIG</span></Link>
             <div className="scene-index"><span>EXPERIMENT 02</span><i /><em>{Math.round(progress * 100).toString().padStart(2, "0")}%</em></div>
           </nav>
 
@@ -227,7 +228,7 @@ export default function ConstellationPage() {
       <section className="constellation-end">
         <p>ONE SIGNAL. ONE STRUCTURE. ONE INSIGHT.</p>
         <h2>데이터가 의미가 되는 순간,<br /><span>JBIG가 시작됩니다.</span></h2>
-        <a href="/">실험 01 · 태블릿 페이지로 돌아가기 <b>↗</b></a>
+        <Link href="/">실험 01 · 태블릿 페이지로 돌아가기 <b>↗</b></Link>
       </section>
     </main>
   );
