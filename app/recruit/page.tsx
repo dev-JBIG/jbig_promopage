@@ -5,6 +5,7 @@ import {
   acronymItems,
   activityAreas,
   curriculumPhases,
+  curriculumWeeks,
   faqItems,
   fitStatements,
   recruitmentConfig,
@@ -121,7 +122,10 @@ export default function RecruitPage() {
                 <ol className="phase-flow">
                   {curriculumPhases.map((item) => (
                     <li key={item.range} className={`phase-card phase-${item.tone}`}>
-                      <span className="phase-range">WEEK<br />{item.range}</span>
+                      <span className="phase-range">
+                        <small>WEEK</small>
+                        <strong>{item.range}</strong>
+                      </span>
                       <div className="phase-copy">
                         <p>{item.label}</p>
                         <h3>{item.title}{item.companion ? <em>+ {item.companion}</em> : null}</h3>
@@ -158,6 +162,36 @@ export default function RecruitPage() {
                 </article>
               </aside>
             </div>
+
+            <details className="curriculum-detail">
+              <summary>
+                <span className="detail-label detail-label-closed">8주 일정 자세히 보기</span>
+                <span className="detail-label detail-label-open">상세 일정 닫기</span>
+                <i aria-hidden="true" />
+              </summary>
+              <div className="curriculum-detail-panel">
+                <header>
+                  <p>WEEK BY WEEK</p>
+                  <h3>질문에서 결과물까지,<br />매주 한 걸음씩.</h3>
+                </header>
+                <ol className="week-detail-grid">
+                  {curriculumWeeks.map((item) => (
+                    <li key={item.week}>
+                      <div className="week-detail-heading">
+                        <span>WEEK</span>
+                        <strong>{item.week}</strong>
+                      </div>
+                      <h4>{item.question}</h4>
+                      <dl>
+                        <div><dt>실습</dt><dd>{item.practice}</dd></div>
+                        <div><dt>프로젝트</dt><dd>{item.project}</dd></div>
+                        <div><dt>세미나</dt><dd>{item.seminar}</dd></div>
+                      </dl>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </details>
           </div>
         </section>
 

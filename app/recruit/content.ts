@@ -34,6 +34,65 @@ export const curriculumPhases = [
   },
 ] as const;
 
+export const curriculumWeeks = [
+  {
+    week: "01",
+    question: "생성형 AI를 이용한 데이터 분석",
+    practice: "데이터 불러오기 · 기초 시각화 · 단순 baseline",
+    project: "팀 구성, 관심 문제와 데이터 후보 수집",
+    seminar: "프로젝트 방향 공유 · 코드 과제",
+  },
+  {
+    week: "02",
+    question: "데이터는 어떻게 읽고 다듬어야 할까?",
+    practice: "EDA · 결측·이상치 · 인코딩 · 스케일링 판단",
+    project: "문제 정의와 데이터 이용 가능성 확인",
+    seminar: "데이터 인사이트 공유",
+  },
+  {
+    week: "03",
+    question: "모델이 잘하고 있는지는 어떻게 알 수 있을까?",
+    practice: "모델 비교 · 평가지표 선택 · 오류 해석",
+    project: "연구·분석 질문과 1차 방법 확정",
+    seminar: "진행 공유 · 코드 과제",
+  },
+  {
+    week: "04",
+    question: "점수가 좋아졌다고 바로 믿어도 될까?",
+    practice: "교차검증 · 누수·과적합 점검 · 재현 가능한 validation",
+    project: "기획안, 역할, 일정, 최소 산출물 확정",
+    seminar: "기획 점검 · 코드 과제",
+  },
+  {
+    week: "05",
+    question: "모델 성능은 어디까지 끌어올릴 수 있을까?",
+    practice: "미니 데이터 분석대회 · 점수 제출",
+    project: "대회 종료 후 구현 착수",
+    seminar: "결과 점검 · 프로젝트 시작",
+  },
+  {
+    week: "06",
+    question: "딥러닝은 뭐가 다른 걸까?",
+    practice: "교안 예제·데모 · 선택형 실습",
+    project: "사이드 프로젝트 구현",
+    seminar: "진행 공유",
+  },
+  {
+    week: "07",
+    question: "이미지를 데이터로 이해한다는 것",
+    practice: "교안 예제·데모 · 선택형 실습",
+    project: "사이드 프로젝트 구현",
+    seminar: "중간 점검",
+  },
+  {
+    week: "08",
+    question: "프로젝트 최종 발표",
+    practice: "필수 코드 과제 없음",
+    project: "결과물 발표 · 피드백 · 아카이빙",
+    seminar: "발표와 질의응답",
+  },
+] as const;
+
 export const fitStatements = [
   "궁금한 건 직접 해봐야 직성이 풀리는 사람",
   "혼자보다 팀에서 더 멀리 가고 싶은 사람",

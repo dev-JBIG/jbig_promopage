@@ -488,11 +488,37 @@
 .phase-deep-learning::after { background: rgba(126, 228, 215, 0.28); }
 
 .phase-range {
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.45;
-  letter-spacing: 0.12em;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
   color: #3a6998;
+}
+
+.phase-range small {
+  width: max-content;
+  padding: 6px 9px;
+  border-radius: 999px;
+  color: #315d8f;
+  background: rgba(255, 255, 255, 0.48);
+  font-size: 10px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.16em;
+}
+
+.phase-range strong {
+  width: max-content;
+  color: transparent;
+  background: linear-gradient(108deg, #1a9f93, #476fd7 72%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: clamp(23px, 2.5vw, 34px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.07em;
 }
 
 .phase-copy { position: relative; z-index: 1; }
@@ -517,9 +543,20 @@
 
 .phase-copy > span { color: #566d8f; font-size: 13px; line-height: 1.55; }
 
-.phase-challenge .phase-range,
 .phase-challenge .phase-copy > p,
 .phase-challenge .phase-copy > span { color: rgba(255, 255, 255, 0.74); }
+
+.phase-challenge .phase-range small {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.phase-challenge .phase-range strong {
+  background: linear-gradient(108deg, #b8fff2, #fff 76%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
 .phase-challenge .phase-copy h3 { margin: 7px 0 5px; color: #fff; font-size: clamp(25px, 3vw, 38px); }
 
@@ -653,6 +690,187 @@
   width: 118px;
   opacity: 0.78;
   transform: rotate(6deg);
+}
+
+.curriculum-detail {
+  position: relative;
+  margin-top: 26px;
+}
+
+.curriculum-detail > summary {
+  width: max-content;
+  min-height: 56px;
+  margin-left: auto;
+  padding: 0 8px 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-radius: 32px;
+  color: #fff;
+  background: rgba(33, 55, 103, 0.78);
+  box-shadow:
+    inset 0 0 1px rgba(255, 255, 255, 0.45),
+    0 18px 38px rgba(47, 91, 216, 0.18);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  list-style: none;
+}
+
+.curriculum-detail > summary::-webkit-details-marker { display: none; }
+.curriculum-detail > summary:focus-visible { outline: 3px solid var(--aqua); outline-offset: 4px; }
+
+.detail-label {
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: -0.025em;
+}
+
+.detail-label-open { display: none; }
+
+.curriculum-detail > summary i {
+  position: relative;
+  width: 42px;
+  aspect-ratio: 1;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #47cfc1, #3d68db 70%);
+  box-shadow: 0 8px 18px rgba(25, 79, 186, 0.34);
+  transition: transform 240ms ease;
+}
+
+.curriculum-detail > summary i::before,
+.curriculum-detail > summary i::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: #fff;
+  transform: translate(-50%, -50%);
+}
+
+.curriculum-detail > summary i::after { transform: translate(-50%, -50%) rotate(90deg); }
+.curriculum-detail[open] > summary i { transform: rotate(45deg); }
+.curriculum-detail[open] .detail-label-closed { display: none; }
+.curriculum-detail[open] .detail-label-open { display: inline; }
+
+.curriculum-detail-panel {
+  margin-top: 18px;
+  padding: clamp(28px, 4vw, 52px);
+  border-radius: 40px;
+  background:
+    radial-gradient(circle at 92% 0%, rgba(120, 156, 255, 0.24), transparent 28%),
+    radial-gradient(circle at 2% 100%, rgba(126, 228, 215, 0.22), transparent 30%),
+    rgba(255, 255, 255, 0.78);
+  box-shadow: 0 30px 70px rgba(55, 105, 177, 0.12);
+  backdrop-filter: blur(18px);
+  animation: curriculumDetailIn 360ms ease both;
+}
+
+.curriculum-detail-panel > header {
+  display: grid;
+  grid-template-columns: 0.65fr 1.35fr;
+  gap: clamp(28px, 6vw, 80px);
+  align-items: end;
+  padding-bottom: clamp(30px, 4vw, 48px);
+}
+
+.curriculum-detail-panel > header p {
+  margin: 0;
+  color: #4f77a2;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.18em;
+}
+
+.curriculum-detail-panel > header h3 {
+  margin: 0;
+  color: var(--navy);
+  font-size: clamp(34px, 4.5vw, 58px);
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+
+.week-detail-grid {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  list-style: none;
+}
+
+.week-detail-grid > li {
+  min-width: 0;
+  min-height: 320px;
+  padding: clamp(24px, 3vw, 34px);
+  display: flex;
+  flex-direction: column;
+  border-radius: 28px;
+  background: rgba(250, 253, 255, 0.82);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+.week-detail-grid > li:nth-child(5) {
+  color: #fff;
+  background: linear-gradient(135deg, #2349ad, #4d76dd 70%, #6d9af3);
+  box-shadow: 0 18px 38px rgba(42, 82, 184, 0.18);
+}
+
+.week-detail-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  color: #4c74a0;
+}
+
+.week-detail-heading span { font-size: 9px; font-weight: 900; letter-spacing: 0.16em; }
+.week-detail-heading strong { font-size: 25px; font-weight: 900; letter-spacing: -0.06em; }
+
+.week-detail-grid h4 {
+  margin: 26px 0 32px;
+  color: var(--navy);
+  font-size: clamp(23px, 2.25vw, 30px);
+  line-height: 1.18;
+  letter-spacing: -0.055em;
+}
+
+.week-detail-grid dl { margin: auto 0 0; }
+
+.week-detail-grid dl > div {
+  padding: 11px 0;
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 10px;
+  border-top: 1px solid rgba(70, 103, 151, 0.14);
+}
+
+.week-detail-grid dt {
+  color: #4b70a0;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.week-detail-grid dd {
+  margin: 0;
+  color: #596f91;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.week-detail-grid > li:nth-child(5) .week-detail-heading,
+.week-detail-grid > li:nth-child(5) h4,
+.week-detail-grid > li:nth-child(5) dt,
+.week-detail-grid > li:nth-child(5) dd { color: #fff; }
+
+.week-detail-grid > li:nth-child(5) dl > div { border-top-color: rgba(255, 255, 255, 0.18); }
+
+@keyframes curriculumDetailIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .awards-section {
@@ -1163,7 +1381,9 @@
   .chart-heading { align-items: flex-start; flex-direction: column; gap: 9px; padding-bottom: 22px; }
   .phase-flow { min-height: 630px; grid-template-rows: 2.5fr 1.2fr 2fr; gap: 9px; }
   .phase-card { padding: 22px 18px; grid-template-columns: 58px 1fr; gap: 12px; border-radius: 24px; }
-  .phase-range { font-size: 9px; }
+  .phase-range { gap: 7px; }
+  .phase-range small { padding: 5px 7px; font-size: 8px; }
+  .phase-range strong { font-size: 20px; }
   .phase-copy h3 { margin: 8px 0 10px; font-size: 32px; }
   .phase-copy h3 em { margin-top: 7px; font-size: 0.56em; }
   .phase-copy > span { font-size: 12px; }
@@ -1176,6 +1396,20 @@
   .challenge-signals,
   .project-flow { right: 24px; bottom: 30px; left: 24px; }
   .project-mascot { right: -15px; bottom: 38px; width: 122px; }
+  .curriculum-detail { margin-top: 18px; }
+  .curriculum-detail > summary {
+    width: 100%;
+    min-height: 54px;
+    padding-left: 18px;
+    justify-content: space-between;
+  }
+  .curriculum-detail > summary i { width: 40px; }
+  .curriculum-detail-panel { padding: 28px 14px 14px; border-radius: 30px; }
+  .curriculum-detail-panel > header { grid-template-columns: 1fr; gap: 16px; padding: 0 10px 30px; }
+  .curriculum-detail-panel > header h3 { font-size: 38px; }
+  .week-detail-grid { grid-template-columns: 1fr; gap: 9px; }
+  .week-detail-grid > li { min-height: 300px; padding: 26px 22px; border-radius: 23px; }
+  .week-detail-grid h4 { font-size: 25px; }
   .awards-section { padding: 110px 0 130px; }
   .awards-intro { grid-template-columns: 1fr; gap: 46px; }
   .awards-heading h2 { font-size: clamp(45px, 13.2vw, 58px); }

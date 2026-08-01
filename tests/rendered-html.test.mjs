@@ -108,6 +108,11 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "코드 과제",
     "06–08",
     "딥러닝",
+    "8주 일정 자세히 보기",
+    "생성형 AI를 이용한 데이터 분석",
+    "데이터는 어떻게 읽고 다듬어야 할까?",
+    "모델이 잘하고 있는지는 어떻게 알 수 있을까?",
+    "프로젝트 최종 발표",
     "도전은,",
     "46",
     "제주·AWS 글로벌 스페이스 챌린지 해커톤",
@@ -130,7 +135,6 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "생성형 AI와 데이터 분석",
     "데이터 읽기와 다듬기",
     "모델을 평가하는 법",
-    "프로젝트 최종 발표",
   ]) {
     assert.equal(html.toLowerCase().includes(phrase.toLowerCase()), false, `unexpected recruitment copy: ${phrase}`);
   }
@@ -147,6 +151,10 @@ test("server-renders the JBIG recruitment landing page", async () => {
   assert.match(html, /<main(?=[^>]*id="recruit-main")(?=[^>]*tabindex="-1")[^>]*>/i);
   assert.doesNotMatch(html, /tabindex="0"/i);
   assert.match(html, /class="liquid-logo"[^>]*role="img"/i);
+  assert.match(html, /<details class="curriculum-detail">/i);
+  assert.match(html, /<summary>\s*<span class="detail-label detail-label-closed">8주 일정 자세히 보기<\/span>/i);
+  assert.match(html, /<small>WEEK<\/small>\s*<strong>01–04<\/strong>/i);
+  assert.match(html, /class="week-detail-grid"/i);
   assert.match(html, /class="mini-mascot mascot-(?:wave|note|look|peek)/i);
   assert.match(html, /<details[^>]*open/i);
   assert.doesNotMatch(html, /<svg\b/i);
@@ -172,6 +180,9 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(recruitPage, /<AwardsRibbon\s*\/>/);
   assert.match(recruitCss, /fox-mascots\.webp/);
   assert.match(recruitCss, /\.phase-flow/);
+  assert.match(recruitCss, /\.curriculum-detail\[open\]/);
+  assert.match(recruitCss, /\.detail-label-open/);
+  assert.match(recruitCss, /\.week-detail-grid/);
   assert.match(recruitCss, /\.liquid-logo > span\s*\{[^}]*background-clip:\s*text/s);
   assert.doesNotMatch(recruitCss, /\.liquid-logo > span\s*\{[^}]*aspect-ratio/s);
   assert.doesNotMatch(recruitPage, /"use client"/);
