@@ -140,13 +140,15 @@
   font-size: clamp(78px, 11vw, 150px);
   font-weight: 900;
   line-height: 0.82;
-  letter-spacing: -0.12em;
+  letter-spacing: 0;
   filter:
     drop-shadow(0 0 12px rgba(126, 228, 215, 0.34))
     drop-shadow(0 14px 28px rgba(47, 91, 216, 0.16));
   transform: translateY(calc((var(--letter-index) % 2) * 4px));
   animation: liquidShimmer 9s ease-in-out infinite alternate;
 }
+
+.liquid-logo > span:not(:last-child) { margin-right: -0.12em; }
 
 .recruit-hero-copy h1,
 .about-heading h2,
@@ -316,7 +318,7 @@
   font-size: clamp(64px, 7vw, 98px);
   font-weight: 900;
   line-height: 0.9;
-  letter-spacing: -0.09em;
+  letter-spacing: 0;
   filter: drop-shadow(0 9px 20px rgba(47, 91, 216, 0.16));
 }
 
