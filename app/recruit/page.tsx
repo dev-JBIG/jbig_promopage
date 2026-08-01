@@ -4,13 +4,13 @@ import Link from "next/link";
 import {
   acronymItems,
   activityAreas,
-  curriculumPhases,
   curriculumWeeks,
   faqItems,
   fitStatements,
   recruitmentConfig,
 } from "./content";
 import AwardsRibbon from "./AwardsRibbon";
+import CurriculumShowcase from "./CurriculumShowcase";
 import "./recruit.css";
 
 const title = "JBIG 모집 | 호기심이 팀이 되는 곳";
@@ -114,49 +114,7 @@ export default function RecruitPage() {
             </header>
 
             <div className="curriculum-layout">
-              <div className="curriculum-chart">
-                <ol className="phase-flow">
-                  {curriculumPhases.map((item) => (
-                    <li key={item.range} className={`phase-card phase-${item.tone}`}>
-                      <span className="phase-range">
-                        <small>WEEK</small>
-                        <strong>{item.range}</strong>
-                      </span>
-                      <div className="phase-copy">
-                        <p>{item.label}</p>
-                        <h3>{item.title}{item.companion ? <em>+ {item.companion}</em> : null}</h3>
-                        <span>{item.description}</span>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-
-              <aside className="curriculum-side" aria-label="미니 데이터 분석대회와 팀 프로젝트">
-                <article className="challenge-card">
-                  <p>WEEK 05 · MINI CHALLENGE</p>
-                  <h3>작게 경쟁하고,<br />제대로 검증합니다.</h3>
-                  <span className="challenge-name">데이터 분석대회</span>
-                  <ul className="challenge-signals" aria-label="대회 평가 관점">
-                    <li>점수</li>
-                    <li>분석 과정</li>
-                    <li>검증 설계</li>
-                    <li>재현성</li>
-                  </ul>
-                </article>
-
-                <article className="project-card">
-                  <p>WEEK 01–08 · TEAM PROJECT</p>
-                  <h3>한 팀의 질문이<br />결과물이 되기까지.</h3>
-                  <ol className="project-flow" aria-label="팀 프로젝트 진행 단계">
-                    <li><i aria-hidden="true" />아이디어</li>
-                    <li><i aria-hidden="true" />데이터</li>
-                    <li><i aria-hidden="true" />구현</li>
-                    <li><i aria-hidden="true" />발표</li>
-                  </ol>
-                  <Mascot pose="note" className="project-mascot" />
-                </article>
-              </aside>
+              <CurriculumShowcase />
             </div>
 
             <details className="curriculum-detail">

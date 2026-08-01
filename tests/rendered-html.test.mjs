@@ -104,7 +104,8 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "Big Data",
     "데이터 사이언스",
     "01–04",
-    "데이터 분석대회",
+    "JBIG DATA ARENA",
+    "JBIG SOLUTION STUDIO",
     "코드 과제",
     "06–08",
     "딥러닝",
@@ -157,6 +158,15 @@ test("server-renders the JBIG recruitment landing page", async () => {
   assert.match(html, /<summary>\s*<span class="detail-label detail-label-closed">8주 일정 자세히 보기<\/span>/i);
   assert.match(html, /<small>WEEK<\/small>\s*<strong>01–04<\/strong>/i);
   assert.match(html, /class="week-detail-grid"/i);
+  for (const phase of ["analysis", "challenge", "deep-learning", "studio"]) {
+    assert.match(html, new RegExp(`data-curriculum-phase="${phase}"`));
+    assert.match(html, new RegExp(`data-phase-open="${phase}"`));
+  }
+  assert.equal((html.match(/data-curriculum-phase=/g) ?? []).length, 4);
+  assert.equal((html.match(/class="phase-expand-icon"/g) ?? []).length, 4);
+  assert.equal((html.match(/aria-haspopup="dialog"/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /data-program-expand=|class="phase-expandable"/i);
+  assert.doesNotMatch(html, /class="challenge-signals"|class="project-flow"|class="project-mascot"/i);
   assert.match(html, /class="mini-mascot mascot-(?:wave|note|look|peek)/i);
   assert.match(html, /<details[^>]*open/i);
   assert.doesNotMatch(html, /<svg\b/i);
@@ -164,9 +174,10 @@ test("server-renders the JBIG recruitment landing page", async () => {
 });
 
 test("keeps recruitment visuals lightweight, responsive, and reduced-motion aware", async () => {
-  const [recruitCss, recruitPage] = await Promise.all([
+  const [recruitCss, recruitPage, curriculumShowcase] = await Promise.all([
     readFile(new URL("../app/recruit/recruit.css", import.meta.url), "utf8"),
     readFile(new URL("../app/recruit/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../app/recruit/CurriculumShowcase.tsx", import.meta.url), "utf8"),
   ]);
 
   assert.match(recruitCss, /prefers-reduced-motion:\s*reduce/);
@@ -180,8 +191,21 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(recruitCss, /\.award-ribbon-row\s*\{[^}]*width:\s*100%[^}]*min-width:\s*0/s);
   assert.match(recruitCss, /\.award-ribbon-viewport\s*\{[^}]*max-width:\s*100%/s);
   assert.match(recruitPage, /<AwardsRibbon\s*\/>/);
+  assert.match(recruitPage, /<CurriculumShowcase\s*\/>/);
   assert.match(recruitCss, /fox-mascots\.webp/);
-  assert.match(recruitCss, /\.phase-flow/);
+  assert.match(recruitCss, /\.phase-flow\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
+  assert.match(recruitCss, /@keyframes\s+phaseModalFluidIn/);
+  assert.match(recruitCss, /\.phase-modal-backdrop/);
+  assert.match(recruitCss, /\.phase-modal-schedule/);
+  assert.doesNotMatch(recruitCss, /\.phase-expandable|\.phase-expanded/);
+  assert.match(curriculumShowcase, /^"use client";/);
+  assert.match(curriculumShowcase, /createPortal/);
+  assert.match(curriculumShowcase, /role="dialog"/);
+  assert.match(curriculumShowcase, /aria-modal="true"/);
+  assert.match(curriculumShowcase, /event\.key === "Escape"/);
+  assert.match(curriculumShowcase, /curriculumWeeks\.slice\(0, 4\)/);
+  assert.match(curriculumShowcase, /curriculumWeeks\.slice\(5, 8\)/);
+  assert.match(curriculumShowcase, /className="project-ascent"/);
   assert.doesNotMatch(recruitPage, /chart-heading|WEEKLY FLOW|8주를 세 개의 흐름으로/);
   assert.doesNotMatch(recruitCss, /\.chart-heading/);
   assert.match(recruitCss, /\.curriculum-detail\[open\]/);
@@ -225,6 +249,36 @@ test("server-renders three JBIG awards motion demos", async () => {
 
   assert.doesNotMatch(html, /정려상/);
   assert.doesNotMatch(html, /<svg\b/i);
+});
+
+test("server-renders five JBIG program naming demos", async () => {
+  const [response, css] = await Promise.all([
+    render("/recruit/program-lab"),
+    readFile(new URL("../app/recruit/program-lab/program-lab.css", import.meta.url), "utf8"),
+  ]);
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.match(html, /<title>JBIG 프로그램 카드 데모<\/title>/i);
+  assert.match(html, /같은 활동,/);
+  assert.match(html, /JBIG DATA ARENA/);
+  assert.match(html, /JBIG SOLUTION STUDIO/);
+  assert.match(html, /BASELINE BREAKERS/);
+  assert.match(html, /PORTFOLIO FOUNDRY/);
+  assert.match(html, /EVIDENCE CHALLENGE/);
+
+  for (const demo of ["a", "b", "c", "d", "e"]) {
+    assert.match(html, new RegExp(`data-program-demo="${demo}"`));
+  }
+
+  const selectedCards = html.match(/<article[^>]*data-selected-card="(?:competition|project)"[^>]*>[\s\S]*?<\/article>/gi) ?? [];
+  assert.equal(selectedCards.length, 2);
+  assert.doesNotMatch(selectedCards.join("\n"), /YOU LEAVE WITH|program-outcomes|program-flow/);
+  assert.match(selectedCards.join("\n"), /class="program-ascent"/);
+
+  assert.match(css, /@media\s*\(max-width:\s*760px\)/);
+  assert.match(css, /prefers-reduced-motion:\s*reduce/);
+  assert.doesNotMatch(html, /0\.541|94\.8|\+8\.4/);
 });
 
 test("keeps awards demos CSS-only, pausable, and reduced-motion aware", async () => {

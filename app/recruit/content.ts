@@ -18,10 +18,10 @@ export const curriculumPhases = [
   },
   {
     range: "05",
-    label: "MINI CHALLENGE",
-    title: "데이터 분석대회",
+    label: "PERFORMANCE ARENA",
+    title: "JBIG DATA ARENA",
     companion: null,
-    description: "배운 내용을 한 번의 실전으로 확인합니다.",
+    description: "리더보드 경쟁을 검증과 회고까지 이어갑니다.",
     tone: "challenge",
   },
   {
@@ -31,6 +31,14 @@ export const curriculumPhases = [
     companion: null,
     description: "핵심 개념과 실습을 팀 프로젝트로 이어갑니다.",
     tone: "deep-learning",
+  },
+  {
+    range: "01–08",
+    label: "BUILD STUDIO",
+    title: "JBIG SOLUTION STUDIO",
+    companion: null,
+    description: "팀의 질문을 프로토타입과 발표로 완성합니다.",
+    tone: "studio",
   },
 ] as const;
 
@@ -66,7 +74,7 @@ export const curriculumWeeks = [
   {
     week: "05",
     question: "모델 성능은 어디까지 끌어올릴 수 있을까?",
-    practice: "미니 데이터 분석대회 · 점수 제출",
+    practice: "JBIG DATA ARENA · 점수 제출",
     project: "대회 종료 후 구현 착수",
     seminar: "결과 점검 · 프로젝트 시작",
   },
@@ -74,21 +82,21 @@ export const curriculumWeeks = [
     week: "06",
     question: "딥러닝은 뭐가 다른 걸까?",
     practice: "교안 예제·데모 · 선택형 실습",
-    project: "사이드 프로젝트 구현",
+    project: "JBIG SOLUTION STUDIO 구현",
     seminar: "진행 공유",
   },
   {
     week: "07",
     question: "이미지를 데이터로 이해한다는 것",
     practice: "교안 예제·데모 · 선택형 실습",
-    project: "사이드 프로젝트 구현",
+    project: "JBIG SOLUTION STUDIO 구현",
     seminar: "중간 점검",
   },
   {
     week: "08",
     question: "프로젝트 최종 발표",
     practice: "필수 코드 과제 없음",
-    project: "결과물 발표 · 피드백 · 아카이빙",
+    project: "JBIG SOLUTION STUDIO 데모데이 · 피드백 · 아카이빙",
     seminar: "발표와 질의응답",
   },
 ] as const;
