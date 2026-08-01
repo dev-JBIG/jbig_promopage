@@ -135,6 +135,8 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "생성형 AI와 데이터 분석",
     "데이터 읽기와 다듬기",
     "모델을 평가하는 법",
+    "WEEKLY FLOW",
+    "8주를 세 개의 흐름으로",
   ]) {
     assert.equal(html.toLowerCase().includes(phrase.toLowerCase()), false, `unexpected recruitment copy: ${phrase}`);
   }
@@ -180,6 +182,8 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(recruitPage, /<AwardsRibbon\s*\/>/);
   assert.match(recruitCss, /fox-mascots\.webp/);
   assert.match(recruitCss, /\.phase-flow/);
+  assert.doesNotMatch(recruitPage, /chart-heading|WEEKLY FLOW|8주를 세 개의 흐름으로/);
+  assert.doesNotMatch(recruitCss, /\.chart-heading/);
   assert.match(recruitCss, /\.curriculum-detail\[open\]/);
   assert.match(recruitCss, /\.detail-label-open/);
   assert.match(recruitCss, /\.week-detail-grid/);

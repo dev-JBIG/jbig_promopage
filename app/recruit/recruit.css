@@ -346,7 +346,6 @@
 }
 
 .activity-heading > p,
-.chart-heading > p,
 .challenge-card > p,
 .project-card > p,
 .phase-copy > p {
@@ -410,25 +409,8 @@
 }
 
 .curriculum-chart {
-  padding: clamp(26px, 3vw, 40px);
-  border-radius: 40px;
-  background: rgba(255, 255, 255, 0.66);
-  box-shadow:
-    0 30px 70px rgba(55, 105, 177, 0.11),
-    inset 0 1px 0 rgba(255, 255, 255, 0.94);
-  backdrop-filter: blur(16px);
+  min-width: 0;
 }
-
-.chart-heading {
-  padding: 2px 4px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-}
-
-.chart-heading > p { color: #52729c; }
-.chart-heading > span { color: #7183a4; font-size: 12px; }
 
 .phase-flow {
   min-height: 760px;
@@ -1377,8 +1359,6 @@
   .about-mascot { top: auto; right: -2px; bottom: -26px; width: 128px; }
   .curriculum-inner { width: min(100% - 36px, 1180px); }
   .curriculum-layout { grid-template-columns: 1fr; gap: 14px; }
-  .curriculum-chart { padding: 24px 18px; border-radius: 30px; }
-  .chart-heading { align-items: flex-start; flex-direction: column; gap: 9px; padding-bottom: 22px; }
   .phase-flow { min-height: 630px; grid-template-rows: 2.5fr 1.2fr 2fr; gap: 9px; }
   .phase-card { padding: 22px 18px; grid-template-columns: 58px 1fr; gap: 12px; border-radius: 24px; }
   .phase-range { gap: 7px; }

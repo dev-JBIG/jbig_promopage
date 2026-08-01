@@ -115,10 +115,6 @@ export default function RecruitPage() {
 
             <div className="curriculum-layout">
               <div className="curriculum-chart">
-                <div className="chart-heading">
-                  <p>WEEKLY FLOW</p>
-                  <span>8주를 세 개의 흐름으로</span>
-                </div>
                 <ol className="phase-flow">
                   {curriculumPhases.map((item) => (
                     <li key={item.range} className={`phase-card phase-${item.tone}`}>
