@@ -347,8 +347,7 @@
   backdrop-filter: blur(18px);
 }
 
-.activity-heading > p,
-.phase-label {
+.activity-heading > p {
   margin: 0;
   font-size: 10px;
   font-weight: 800;
@@ -506,7 +505,10 @@ article.phase-card .phase-overview { height: 100%; }
 }
 
 .phase-range strong {
+  display: block;
   width: max-content;
+  margin-inline: -0.08em;
+  padding-inline: 0.08em;
   color: transparent;
   background: linear-gradient(108deg, #1a9f93, #476fd7 72%);
   background-clip: text;
@@ -527,13 +529,11 @@ article.phase-card .phase-overview { height: 100%; }
   align-items: flex-start;
 }
 
-.phase-label { color: #5579a2; }
-
 .phase-title {
   display: block;
-  margin: 12px 0 14px;
+  margin: 0 0 16px;
   color: var(--navy);
-  font-size: clamp(32px, 3.8vw, 50px);
+  font-size: clamp(36px, 4.1vw, 54px);
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.065em;
@@ -548,9 +548,14 @@ article.phase-card .phase-overview { height: 100%; }
   letter-spacing: -0.045em;
 }
 
-.phase-description { color: #566d8f; font-size: 13px; line-height: 1.55; }
+.phase-description {
+  max-width: 38em;
+  color: #566d8f;
+  font-size: 13px;
+  line-height: 1.55;
+  word-break: keep-all;
+}
 
-.phase-challenge .phase-label,
 .phase-challenge .phase-description { color: rgba(255, 255, 255, 0.74); }
 
 .phase-challenge .phase-range small {
@@ -565,8 +570,8 @@ article.phase-card .phase-overview { height: 100%; }
   -webkit-text-fill-color: transparent;
 }
 
-.phase-challenge .phase-title { margin: 8px 0 12px; color: #fff; font-size: clamp(28px, 3.3vw, 44px); }
-.phase-studio .phase-title { font-size: clamp(25px, 3vw, 40px); }
+.phase-challenge .phase-title { margin-bottom: 14px; color: #fff; font-size: clamp(31px, 3.6vw, 47px); }
+.phase-studio .phase-title { font-size: clamp(28px, 3.3vw, 43px); }
 
 .phase-open-button {
   width: 46px;
@@ -1636,12 +1641,11 @@ article.phase-card .phase-overview { height: 100%; }
   .phase-range { gap: 7px; }
   .phase-range small { padding: 5px 7px; font-size: 8px; }
   .phase-range strong { font-size: 20px; }
-  .phase-label { font-size: 10px; }
-  .phase-title { margin: 9px 0 11px; font-size: clamp(27px, 8.5vw, 36px); }
+  .phase-title { margin: 0 0 12px; font-size: clamp(30px, 9vw, 39px); }
   .phase-title em { margin-top: 7px; font-size: 0.56em; }
   .phase-description { font-size: 11px; }
-  .phase-challenge .phase-title { font-size: clamp(25px, 7.6vw, 32px); }
-  .phase-studio .phase-title { font-size: clamp(22px, 6.5vw, 29px); }
+  .phase-challenge .phase-title { font-size: clamp(27px, 8vw, 34px); }
+  .phase-studio .phase-title { font-size: clamp(24px, 7vw, 31px); }
   .phase-open-button,
   .phase-expand-icon { width: 40px; height: 40px; }
   .phase-modal-backdrop { padding: 12px; }

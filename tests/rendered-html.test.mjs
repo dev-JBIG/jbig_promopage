@@ -109,6 +109,10 @@ test("server-renders the JBIG recruitment landing page", async () => {
     "코드 과제",
     "06–08",
     "딥러닝",
+    "실제 현실 데이터로 배우는 빅데이터 분석과정",
+    "제대로 경험해보는 캐글-like INSIGHT X ML 분석대회",
+    "개념 이해부터, 실제로 적용해보는 프로젝트까지.",
+    "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
     "8주 일정 자세히 보기",
     "생성형 AI를 이용한 데이터 분석",
     "데이터는 어떻게 읽고 다듬어야 할까?",
@@ -165,6 +169,7 @@ test("server-renders the JBIG recruitment landing page", async () => {
   assert.equal((html.match(/data-curriculum-phase=/g) ?? []).length, 4);
   assert.equal((html.match(/class="phase-expand-icon"/g) ?? []).length, 4);
   assert.equal((html.match(/aria-haspopup="dialog"/g) ?? []).length, 4);
+  assert.doesNotMatch(html, /class="phase-label"/i);
   assert.doesNotMatch(html, /data-program-expand=|class="phase-expandable"/i);
   assert.doesNotMatch(html, /class="challenge-signals"|class="project-flow"|class="project-mascot"/i);
   assert.match(html, /class="mini-mascot mascot-(?:wave|note|look|peek)/i);
@@ -197,6 +202,8 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(recruitCss, /@keyframes\s+phaseModalFluidIn/);
   assert.match(recruitCss, /\.phase-modal-backdrop/);
   assert.match(recruitCss, /\.phase-modal-schedule/);
+  assert.match(recruitCss, /\.phase-range strong\s*\{[^}]*padding-inline:\s*0\.08em/s);
+  assert.doesNotMatch(recruitCss, /\.phase-label/);
   assert.doesNotMatch(recruitCss, /\.phase-expandable|\.phase-expanded/);
   assert.match(curriculumShowcase, /^"use client";/);
   assert.match(curriculumShowcase, /createPortal/);

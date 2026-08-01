@@ -13,7 +13,7 @@ export const curriculumPhases = [
     label: "DATA ANALYSIS",
     title: "데이터 분석",
     companion: "코드 과제",
-    description: "공통 데이터로 배우고, 누적형 코드 과제를 완성합니다.",
+    description: "실제 현실 데이터로 배우는 빅데이터 분석과정",
     tone: "analysis",
   },
   {
@@ -21,7 +21,7 @@ export const curriculumPhases = [
     label: "PERFORMANCE ARENA",
     title: "JBIG DATA ARENA",
     companion: null,
-    description: "리더보드 경쟁을 검증과 회고까지 이어갑니다.",
+    description: "제대로 경험해보는 캐글-like INSIGHT X ML 분석대회",
     tone: "challenge",
   },
   {
@@ -29,7 +29,7 @@ export const curriculumPhases = [
     label: "DEEP LEARNING",
     title: "딥러닝",
     companion: null,
-    description: "핵심 개념과 실습을 팀 프로젝트로 이어갑니다.",
+    description: "개념 이해부터, 실제로 적용해보는 프로젝트까지.",
     tone: "deep-learning",
   },
   {
@@ -37,7 +37,7 @@ export const curriculumPhases = [
     label: "BUILD STUDIO",
     title: "JBIG SOLUTION STUDIO",
     companion: null,
-    description: "팀의 질문을 프로토타입과 발표로 완성합니다.",
+    description: "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
     tone: "studio",
   },
 ] as const;

@@ -97,7 +97,6 @@ export default function CurriculumShowcase() {
                   <strong>{item.range}</strong>
                 </span>
                 <span className="phase-copy">
-                  <span className="phase-label">{item.label}</span>
                   <strong className="phase-title">{item.title}{item.companion ? <em>+ {item.companion}</em> : null}</strong>
                   <span className="phase-description">{item.description}</span>
                 </span>
