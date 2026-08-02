@@ -138,6 +138,8 @@ test("server-renders the JBIG recruitment landing page", async () => {
   assert.doesNotMatch(html, /data-program-expand=|class="phase-expandable"/i);
   assert.doesNotMatch(html, /class="challenge-signals"|class="project-flow"|class="project-mascot"/i);
   assert.match(html, /class="mini-mascot mascot-(?:wave|note|look|peek)/i);
+  assert.match(html, /class="about-stalking-fox"/i);
+  assert.doesNotMatch(html, /class="about-mascot"/i);
   assert.match(html, /<details[^>]*open/i);
   assert.doesNotMatch(html, /<svg\b/i);
   assert.doesNotMatch(html, /aria-live=/i);
@@ -149,14 +151,25 @@ test("builds a self-contained nginx bundle for /recruit", async () => {
     readdir(new URL("../dist/deploy/assets/", import.meta.url)),
     access(new URL("../dist/deploy/favicon.svg", import.meta.url)),
     access(new URL("../dist/deploy/fox-mascots.webp", import.meta.url)),
+    access(new URL("../dist/deploy/apply-mascot-trio-v1.png", import.meta.url)),
+    access(new URL("../dist/deploy/about-stalking-fox-v1.png", import.meta.url)),
     access(new URL("../dist/deploy/recruit.rsc", import.meta.url)),
   ]);
+  const builtCss = (await Promise.all(
+    assetFiles
+      .filter((name) => name.endsWith(".css"))
+      .map((name) => readFile(new URL(`../dist/deploy/assets/${name}`, import.meta.url), "utf8")),
+  )).join("\n");
 
   assert.match(html, /<title>[^<]+<\/title>/i);
   assert.match(html, /(?:href|src)="\/recruit\/assets\//i);
   assert.match(html, /href="\/recruit\/favicon\.svg"/i);
+  assert.match(html, /\/recruit\/fox-mascots\.webp/i);
+  assert.match(html, /\/recruit\/apply-mascot-trio-v1\.png/i);
+  assert.match(html, /\/recruit\/about-stalking-fox-v1\.png/i);
   assert.doesNotMatch(html, /(?:href|src)="\/assets\//i);
-  assert.doesNotMatch(html, /href="\/recruit\/recruit(?:[\/#?]|\")/i);
+  assert.doesNotMatch(html, /\/recruit\/recruit\//i);
+  assert.doesNotMatch(builtCss, /\/recruit\/recruit\/fox-mascots\.webp/i);
   assert.equal(assetFiles.some((name) => name.endsWith(".css")), true);
   assert.equal(assetFiles.some((name) => name.endsWith(".js")), true);
 });
@@ -212,7 +225,15 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
       < testimonialsSection.indexOf('className="testimonial-story-copy"'),
     "testimonial document order should be number, author, then full review",
   );
-  assert.match(recruitCss, /fox-mascots\.webp/);
+  assert.match(recruitPage, /\/recruit\/fox-mascots\.webp/);
+  assert.match(recruitPage, /\/recruit\/apply-mascot-trio-v1\.png/);
+  assert.match(recruitPage, /\/recruit\/about-stalking-fox-v1\.png/);
+  assert.match(recruitCss, /\.about-stalking-fox/);
+  assert.doesNotMatch(recruitPage, /className="about-mascot"/);
+  assert.doesNotMatch(recruitCss, /\.about-mascot/);
+  assert.match(recruitCss, /\.apply-mascot-trio/);
+  assert.match(recruitCss, /\.application-button\s*\{[^}]*width:\s*min\(400px,[^}]*min-height:\s*76px/s);
+  assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.application-button\s*\{[^}]*min-height:\s*68px/s);
   assert.match(recruitCss, /\.phase-flow\s*\{[^}]*grid-template-columns:\s*repeat\(2,\s*minmax\(0,\s*1fr\)\)/s);
   assert.match(recruitCss, /@keyframes\s+phaseModalFluidIn/);
   assert.match(recruitCss, /\.phase-modal-backdrop/);
@@ -279,6 +300,7 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
 
   await Promise.all([
     access(new URL("../public/recruit/fox-mascots.webp", import.meta.url)),
+    access(new URL("../public/recruit/apply-mascot-trio-v1.png", import.meta.url)),
     access(new URL("../app/recruit/content/index.ts", import.meta.url)),
     access(new URL("../app/recruit/content/site.ts", import.meta.url)),
     access(new URL("../app/recruit/content/testimonials.ts", import.meta.url)),

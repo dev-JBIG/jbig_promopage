@@ -33,8 +33,12 @@ export const metadata: Metadata = {
 
 type MascotPose = "wave" | "note" | "look" | "peek";
 
+const foxMascotStyle = { backgroundImage: 'url("/recruit/fox-mascots.webp")' } as CSSProperties;
+const applyMascotTrioStyle = { backgroundImage: 'url("/recruit/apply-mascot-trio-v1.png")' } as CSSProperties;
+const aboutStalkingFoxStyle = { backgroundImage: 'url("/recruit/about-stalking-fox-v1.png")' } as CSSProperties;
+
 function Mascot({ pose, className = "" }: { pose: MascotPose; className?: string }) {
-  return <span className={`mini-mascot mascot-${pose} ${className}`.trim()} aria-hidden="true" />;
+  return <span className={`mini-mascot mascot-${pose} ${className}`.trim()} style={foxMascotStyle} aria-hidden="true" />;
 }
 
 function LiquidLogo() {
@@ -93,13 +97,13 @@ export default function RecruitPage() {
             <div className="activity-block">
               <div className="activity-heading">
                 <h3>{recruitPageContent.about.activityHeading}</h3>
+                <span className="about-stalking-fox" style={aboutStalkingFoxStyle} aria-hidden="true" />
               </div>
               <div className="activity-list">
                 {activityAreas.map((area, index) => (
                   <span key={area}><i aria-hidden="true">0{index + 1}</i>{area}</span>
                 ))}
               </div>
-              <Mascot pose="peek" className="about-mascot" />
             </div>
           </div>
         </section>
@@ -181,16 +185,18 @@ export default function RecruitPage() {
           <div className="apply-glow" aria-hidden="true" />
           <h2>{recruitPageContent.apply.heading[0]}<br />{recruitPageContent.apply.heading[1]}</h2>
           <span>{recruitPageContent.apply.description}</span>
-          {recruitmentConfig.applicationUrl ? (
-            <a className="application-button" data-application-status="available" href={recruitmentConfig.applicationUrl} target="_blank" rel="noopener noreferrer">
-              {recruitPageContent.apply.buttonLabel} <span aria-hidden="true">↗</span>
-            </a>
-          ) : (
-            <button className="application-button is-disabled" type="button" data-application-status="unavailable" disabled aria-disabled="true">
-              {recruitmentConfig.statusLabel}
-            </button>
-          )}
-          <Mascot pose="peek" className="apply-mascot" />
+          <div className="application-cta">
+            <span className="apply-mascot-trio" style={applyMascotTrioStyle} aria-hidden="true" />
+            {recruitmentConfig.applicationUrl ? (
+              <a className="application-button" data-application-status="available" href={recruitmentConfig.applicationUrl} target="_blank" rel="noopener noreferrer">
+                {recruitPageContent.apply.buttonLabel} <span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <button className="application-button is-disabled" type="button" data-application-status="unavailable" disabled aria-disabled="true">
+                {recruitmentConfig.statusLabel}
+              </button>
+            )}
+          </div>
         </section>
       </main>
 

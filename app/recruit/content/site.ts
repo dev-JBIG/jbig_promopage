@@ -42,7 +42,7 @@ export const recruitPageContent = {
   },
   apply: {
     heading: ["다음 이야기를", "함께 만들어요."],
-    description: "모집 일정과 지원 대상이 확정되면 이곳에서 안내합니다.",
+    description: "",
     buttonLabel: "지원하기",
   },
   footer: {

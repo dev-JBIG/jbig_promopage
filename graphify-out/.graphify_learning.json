@@ -1,5 +1,107 @@
 {
-  "generated_at": "2026-08-01T14:19:10.030407+00:00",
-  "nodes": {},
+  "generated_at": "2026-08-02T12:17:06.477428+00:00",
+  "nodes": {
+    "app_recruit_awardsribbon": {
+      "code_fingerprint": "f0669018357ec548cfb124cec0483078f8694891fbea09c0c3075759f0cac0cb",
+      "label": "AwardsRibbon.tsx",
+      "last": "2026-08-01T14:34:22.937418+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T14:34:22.937418+00:00",
+          "outcome": "useful",
+          "q": "02- 8 WEEK CURRICULUM 같은 작은 섹션 구문과 커리큘럼 팝업의 PERFORMANCE ARENA 같은 문구를 모두 제거"
+        }
+      ],
+      "score": 0.97931461,
+      "source_file": "app/recruit/AwardsRibbon.tsx",
+      "status": "tentative",
+      "uses": 1
+    },
+    "app_recruit_content": {
+      "code_fingerprint": "",
+      "label": "content.ts",
+      "last": "2026-08-01T14:34:22.937418+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T14:34:22.937418+00:00",
+          "outcome": "useful",
+          "q": "02- 8 WEEK CURRICULUM 같은 작은 섹션 구문과 커리큘럼 팝업의 PERFORMANCE ARENA 같은 문구를 모두 제거"
+        }
+      ],
+      "score": 0.97931461,
+      "source_file": "app/recruit/content.ts",
+      "status": "tentative",
+      "uses": 1
+    },
+    "app_recruit_curriculumshowcase": {
+      "code_fingerprint": "2967f700be0a927ea41ea9bad0795e94f2ebd4cb9da58a5092276faccc7e6526",
+      "label": "CurriculumShowcase.tsx",
+      "last": "2026-08-02T04:30:39.955949+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-02T04:30:39.955949+00:00",
+          "outcome": "useful",
+          "q": "데이터 분석 모달의 구와 말풍선 흐름을 단순화하고 데이터 오너먼트 막대를 다섯 줄로 늘리며 모바일을 점검해줘."
+        },
+        {
+          "date": "2026-08-01T14:34:22.937418+00:00",
+          "outcome": "useful",
+          "q": "02- 8 WEEK CURRICULUM 같은 작은 섹션 구문과 커리큘럼 팝업의 PERFORMANCE ARENA 같은 문구를 모두 제거"
+        }
+      ],
+      "score": 1.97185845,
+      "source_file": "app/recruit/CurriculumShowcase.tsx",
+      "status": "preferred",
+      "uses": 2
+    },
+    "app_recruit_curriculumshowcase_curriculumphase": {
+      "code_fingerprint": "2967f700be0a927ea41ea9bad0795e94f2ebd4cb9da58a5092276faccc7e6526",
+      "label": "CurriculumPhase",
+      "last": "2026-08-02T04:30:39.955949+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-02T04:30:39.955949+00:00",
+          "outcome": "useful",
+          "q": "데이터 분석 모달의 구와 말풍선 흐름을 단순화하고 데이터 오너먼트 막대를 다섯 줄로 늘리며 모바일을 점검해줘."
+        }
+      ],
+      "score": 0.992543839,
+      "source_file": "app/recruit/CurriculumShowcase.tsx",
+      "status": "tentative",
+      "uses": 1
+    },
+    "app_recruit_page": {
+      "code_fingerprint": "e002cbcc85c35644672dd326f5f05cf3bb9ba5255eaa9d2fad42fa23ddc069cb",
+      "label": "recruit/page.tsx",
+      "last": "2026-08-01T14:34:22.937418+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T14:34:22.937418+00:00",
+          "outcome": "useful",
+          "q": "02- 8 WEEK CURRICULUM 같은 작은 섹션 구문과 커리큘럼 팝업의 PERFORMANCE ARENA 같은 문구를 모두 제거"
+        }
+      ],
+      "score": 0.97931461,
+      "source_file": "app/recruit/page.tsx",
+      "status": "tentative",
+      "uses": 1
+    },
+    "app_recruit_testimonialssection": {
+      "code_fingerprint": "eb68c5b966a2c38bf5af1abe1a742b7e4300254064b9238a9fe2f857e48d36cc",
+      "label": "TestimonialsSection.tsx",
+      "last": "2026-08-01T14:34:22.937418+00:00",
+      "provenance": [
+        {
+          "date": "2026-08-01T14:34:22.937418+00:00",
+          "outcome": "useful",
+          "q": "02- 8 WEEK CURRICULUM 같은 작은 섹션 구문과 커리큘럼 팝업의 PERFORMANCE ARENA 같은 문구를 모두 제거"
+        }
+      ],
+      "score": 0.97931461,
+      "source_file": "app/recruit/TestimonialsSection.tsx",
+      "status": "tentative",
+      "uses": 1
+    }
+  },
   "version": 1
 }

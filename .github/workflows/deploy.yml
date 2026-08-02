@@ -96,6 +96,8 @@ jobs:
             test -f "$NEW_RELEASE/recruit.rsc"
             test -f "$NEW_RELEASE/favicon.svg"
             test -f "$NEW_RELEASE/fox-mascots.webp"
+            test -f "$NEW_RELEASE/apply-mascot-trio-v1.png"
+            test -f "$NEW_RELEASE/about-stalking-fox-v1.png"
             test -d "$NEW_RELEASE/assets"
 
             ln -sfn "$NEW_RELEASE" "$APP_BASE/current"
