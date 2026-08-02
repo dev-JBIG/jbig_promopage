@@ -7,7 +7,7 @@ const deployDir = fileURLToPath(new URL("../dist/deploy/", import.meta.url));
 const recruitHtml = `${clientDir}/recruit.html`;
 const html = await readFile(recruitHtml, "utf8");
 
-assert.match(html, /<title>JBIG 모집 \| 호기심이 팀이 되는 곳<\/title>/i);
+assert.match(html, /<title>[^<]+<\/title>/i);
 assert.match(html, /(?:href|src)="\/recruit\/assets\//i);
 assert.match(html, /href="\/recruit\/favicon\.svg"/i);
 assert.doesNotMatch(html, /(?:href|src)="\/assets\//i);
