@@ -234,11 +234,31 @@ export default function CurriculumShowcase() {
 
             {activePhase.detail.steps.length > 0 ? (
               <ol className="project-ascent" aria-label={curriculumContent.studioStepsAriaLabel}>
-                {activePhase.detail.steps.map(([step, label]) => (
-                  <li key={step}>
-                    <span><b>{step}</b><strong>{label}</strong></span>
-                    <i aria-hidden="true" />
-                    <em aria-hidden="true" />
+                <svg className="project-route project-route-desktop" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="project-route-desktop-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
+                      <stop offset="0" stopColor="#3fd4c7" />
+                      <stop offset="0.5" stopColor="#37add4" />
+                      <stop offset="1" stopColor="#315bd8" />
+                    </linearGradient>
+                  </defs>
+                  <path className="project-route-glow" d="M45 214 C150 214 170 195 250 184 C340 171 375 162 465 148 C555 134 590 120 675 107 C770 92 805 60 955 44" />
+                  <path d="M45 214 C150 214 170 195 250 184 C340 171 375 162 465 148 C555 134 590 120 675 107 C770 92 805 60 955 44" />
+                </svg>
+                <svg className="project-route project-route-mobile" viewBox="0 0 80 400" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="project-route-mobile-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0" stopColor="#3fd4c7" />
+                      <stop offset="0.5" stopColor="#37add4" />
+                      <stop offset="1" stopColor="#315bd8" />
+                    </linearGradient>
+                  </defs>
+                  <path className="project-route-glow" d="M40 18 C40 70 22 82 36 122 C52 168 56 178 40 216 C24 258 24 274 40 306 C56 338 50 362 40 382" />
+                  <path d="M40 18 C40 70 22 82 36 122 C52 168 56 178 40 216 C24 258 24 274 40 306 C56 338 50 362 40 382" />
+                </svg>
+                {activePhase.detail.steps.map(([, label]) => (
+                  <li key={label}>
+                    <strong>{label}</strong>
                   </li>
                 ))}
               </ol>

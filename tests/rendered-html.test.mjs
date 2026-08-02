@@ -261,6 +261,17 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(recruitCss, /@keyframes\s+challengeModalExpandIn\s*\{[^}]*transform:\s*translate\(var\(--modal-from-x\),\s*var\(--modal-from-y\)\)\s*scale\(0\.08\)/s);
   assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.challenge-arena-layout\s*\{[^}]*grid-template-columns:\s*1fr/s);
   assert.match(curriculumShowcase, /className="project-ascent"/);
+  assert.match(curriculumShowcase, /className="project-route project-route-desktop"/);
+  assert.match(curriculumShowcase, /className="project-route project-route-mobile"/);
+  assert.match(curriculumShowcase, /M45 214 C150 214 170 195/);
+  assert.match(curriculumShowcase, /M40 18 C40 70 22 82/);
+  assert.match(curriculumShowcase, /className="project-route-glow"/);
+  assert.doesNotMatch(curriculumShowcase, /<b>\{step\}<\/b>/);
+  assert.match(recruitCss, /\.project-route-desktop path\s*\{[^}]*stroke:\s*url\(#project-route-desktop-gradient\)/s);
+  assert.match(recruitCss, /\.project-route-mobile path\s*\{[^}]*stroke:\s*url\(#project-route-mobile-gradient\)/s);
+  assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.project-route-desktop\s*\{[^}]*display:\s*none/s);
+  assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.project-route-mobile\s*\{[^}]*display:\s*block/s);
+  assert.doesNotMatch(recruitCss, /\.project-ascent li > (?:i|em)/);
   assert.doesNotMatch(recruitPage, /chart-heading/);
   assert.doesNotMatch(recruitCss, /\.chart-heading/);
   assert.match(recruitCss, /\.curriculum-detail\[open\]/);

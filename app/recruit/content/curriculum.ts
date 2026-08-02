@@ -5,7 +5,7 @@ export const curriculumContent = {
   expandAriaLabelSuffix: "자세히 보기",
   closeAriaLabelSuffix: "상세 내용 닫기",
   scheduleAriaLabelSuffix: "주차별 핵심 일정",
-  studioStepsAriaLabel: "JBIG SOLUTION STUDIO 등산형 진행 단계",
+  studioStepsAriaLabel: "JBIG SOLUTION STUDIO 프로젝트 진행 흐름",
   detail: {
     openLabel: "8주 일정 자세히 보기",
     closeLabel: "상세 일정 닫기",
@@ -131,8 +131,8 @@ export const curriculumPhases = [
         "배운 개념이 점수가 되기까지,",
         "반복된 검증과 판단이 필요합니다.",
       ],
-      keywords: ["검증 설계", "실험", "실패 복기", "제출 판단"],
-      note: "실제 Kaggle, Dacon 대회와 동일하게 설계된 대회로, 개념을 넘어 응용까지.",
+      keywords: ["검증 설계", "실험", "피드백", "제출 판단"],
+      note: "실제 Kaggle, Dacon 과 동일하게 설계된 대회로, 개념을 넘어 응용까지.",
       noteLines: [
         "실제 Kaggle, Dacon 대회와 동일하게 설계된 대회로,",
         "개념을 넘어 응용까지.",
@@ -161,8 +161,8 @@ export const curriculumPhases = [
     description: "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
     tone: "studio",
     detail: {
-      headline: "전공과 연결해서 풀어내보는 취업 대비 포트폴리오 프로젝트.",
-      note: "팀의 질문을 프로토타입과 발표로 완성하는 제작 스튜디오",
+      headline: "당신의 노력이 사라지지 않도록",
+      note: "전공과 연결해서 풀어내보는 취업 대비 포트폴리오 프로젝트",
       weekIds: [],
       steps: [
         ["01", "문제 정의"],
