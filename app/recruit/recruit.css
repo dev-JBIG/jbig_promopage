@@ -672,7 +672,7 @@ article.phase-card .phase-overview { height: 100%; }
 }
 .phase-modal-deep-learning { background: linear-gradient(145deg, #d5e0ff, #f2f6ff 68%, #dff8f3); }
 .phase-modal-studio {
-  padding-bottom: 270px;
+  padding-bottom: clamp(38px, 5vw, 68px);
   background: linear-gradient(145deg, #def9f3, #f1f7ff 66%, #dce7ff);
 }
 
@@ -1271,69 +1271,49 @@ article.phase-card .phase-overview { height: 100%; }
   100% { border-radius: 36px; filter: blur(0); transform: translate(0, 0) scale(1); }
 }
 
-.project-ascent {
-  position: absolute;
-  z-index: 2;
-  right: clamp(32px, 4vw, 50px);
-  bottom: clamp(30px, 3.5vw, 42px);
-  left: clamp(32px, 4vw, 50px);
-  height: clamp(250px, 31vh, 340px);
+.studio-statement {
+  max-width: none;
+  flex: 1;
   margin: 0;
-  padding: 0;
-  list-style: none;
+  padding: clamp(54px, 8vh, 90px) 0 clamp(24px, 4vh, 42px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.project-route {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
+.studio-statement h3 {
+  display: grid;
+  gap: clamp(10px, 1.3vw, 18px);
+  line-height: 1;
 }
 
-.project-route path {
-  fill: none;
-  stroke-width: 11;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  filter: drop-shadow(0 7px 10px rgba(47, 91, 216, 0.2));
+.studio-statement h3 span { display: block; }
+
+.studio-statement-lead {
+  color: #456899;
+  font-size: clamp(40px, 4.1vw, 56px);
+  font-weight: 700;
+  letter-spacing: -0.06em;
 }
 
-.project-route-desktop path { stroke: url(#project-route-desktop-gradient); }
-.project-route-mobile path { stroke: url(#project-route-mobile-gradient); }
-
-.project-route .project-route-glow {
-  stroke-width: 38;
-  opacity: 0.16;
-  filter: blur(10px);
-}
-
-.project-route-mobile { display: none; }
-
-.project-ascent li {
-  --route-level: 17%;
-  position: absolute;
-  bottom: var(--route-level);
-  left: 4%;
-  width: 21.5%;
-  padding: 0 8px 22px;
-  text-align: center;
+.studio-statement-main {
+  width: fit-content;
+  max-width: 100%;
   color: var(--navy);
+  font-size: clamp(54px, 5.2vw, 72px);
+  font-weight: 900;
+  line-height: 1.04;
+  letter-spacing: -0.075em;
 }
 
-.project-ascent li:nth-of-type(2) { --route-level: 34%; left: 27%; }
-.project-ascent li:nth-of-type(3) { --route-level: 51%; left: 51%; }
-.project-ascent li:nth-of-type(4) { --route-level: 72%; left: 75%; }
-
-.project-ascent li strong {
-  display: inline-block;
-  font-size: clamp(17px, 1.35vw, 22px);
-  font-weight: 900;
-  line-height: 1.15;
-  letter-spacing: -0.055em;
-  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.95), 0 6px 20px rgba(47, 91, 216, 0.1);
-  word-break: keep-all;
+.studio-statement p {
+  max-width: none;
+  margin-top: clamp(40px, 6vh, 62px);
+  color: #526b8f;
+  font-size: clamp(20px, 1.8vw, 25px);
+  font-weight: 650;
+  line-height: 1.55;
+  letter-spacing: -0.045em;
 }
 
 .curriculum-detail {
@@ -2200,41 +2180,21 @@ article.phase-card .phase-overview { height: 100%; }
   .phase-modal-with-schedule .phase-modal-schedule li { min-height: 156px; }
   .phase-modal-schedule li > strong { margin-top: 13px; font-size: 17px; }
   .phase-modal-schedule li > p { margin-top: 14px; }
-  .phase-modal-studio { padding-bottom: 32px; }
-  .phase-modal-studio .phase-modal-copy { margin-top: 54px; }
-  .project-ascent {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    left: auto;
-    height: 390px;
-    margin-top: 52px;
-    padding: 0 0 0 76px;
-    display: grid;
-    grid-template-rows: repeat(4, minmax(0, 1fr));
+  .phase-modal-studio { padding-bottom: 30px; }
+  .phase-modal-studio .studio-statement {
+    margin: 0;
+    padding: clamp(64px, 11vh, 88px) 0 32px;
+    justify-content: flex-start;
   }
-  .project-route-desktop { display: none; }
-  .project-route-mobile {
-    inset: 0 auto 0 4px;
-    width: 56px;
-    height: 100%;
-    display: block;
+  .studio-statement h3 { gap: 12px; }
+  .studio-statement-lead { font-size: clamp(34px, 9.6vw, 43px); line-height: 1.08; }
+  .studio-statement-main {
+    font-size: clamp(40px, 10.2vw, 46px);
+    line-height: 1.08;
+    word-break: normal;
+    overflow-wrap: anywhere;
   }
-  .project-route path { stroke-width: 8; }
-  .project-route .project-route-glow { stroke-width: 26; }
-  .project-ascent li:nth-of-type(n) {
-    position: relative;
-    inset: auto;
-    width: auto;
-    padding: 0;
-    display: flex;
-    align-items: center;
-    text-align: left;
-  }
-  .project-ascent li strong {
-    font-size: clamp(19px, 5.3vw, 24px);
-    line-height: 1.15;
-  }
+  .studio-statement p { margin-top: 36px; font-size: clamp(18px, 5vw, 22px); line-height: 1.55; }
   .curriculum-detail { margin-top: 18px; }
   .curriculum-detail > summary {
     width: 100%;

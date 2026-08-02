@@ -5,7 +5,6 @@ export const curriculumContent = {
   expandAriaLabelSuffix: "자세히 보기",
   closeAriaLabelSuffix: "상세 내용 닫기",
   scheduleAriaLabelSuffix: "주차별 핵심 일정",
-  studioStepsAriaLabel: "JBIG SOLUTION STUDIO 프로젝트 진행 흐름",
   detail: {
     openLabel: "8주 일정 자세히 보기",
     closeLabel: "상세 일정 닫기",
@@ -101,7 +100,6 @@ export type CurriculumPhase = {
     supportingLines?: readonly string[];
     keywords?: readonly string[];
     weekIds: readonly CurriculumWeekId[];
-    steps: readonly (readonly [string, string])[];
   };
 };
 
@@ -116,7 +114,6 @@ export const curriculumPhases = [
       headline: "분석의 기본을, 직접 해보며 익힙니다.",
       note: "공통 데이터와 누적형 코드 과제로 분석의 흐름을 만듭니다.",
       weekIds: ["01", "02", "03", "04"],
-      steps: [],
     },
   },
   {
@@ -128,7 +125,7 @@ export const curriculumPhases = [
     detail: {
       headline: "누구나 다 계획이 있죠. 당하기 전까지는.",
       supportingLines: [
-        "배운 개념이 점수가 되기까지,",
+        "배운 개념이 날카로운 분석이 되기까지,",
         "반복된 검증과 판단이 필요합니다.",
       ],
       keywords: ["검증 설계", "실험", "피드백", "제출 판단"],
@@ -138,7 +135,6 @@ export const curriculumPhases = [
         "개념을 넘어 응용까지.",
       ],
       weekIds: [],
-      steps: [],
     },
   },
   {
@@ -151,7 +147,6 @@ export const curriculumPhases = [
       headline: "이해부터 응용까지 한 번에",
       note: "최신 트렌드의 기술들을 활용해서, 결과물을 만들어볼 기회",
       weekIds: ["06", "07", "08"],
-      steps: [],
     },
   },
   {
@@ -161,15 +156,9 @@ export const curriculumPhases = [
     description: "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
     tone: "studio",
     detail: {
-      headline: "당신의 노력이 사라지지 않도록",
-      note: "전공과 연결해서 풀어내보는 취업 대비 포트폴리오 프로젝트",
+      headline: "각자의 질문이,\n오래 남는 프로젝트가 되도록.",
+      note: "팀원들과 함께, 한 학기 동안의 긴 호흡으로 완성하는 프로젝트.",
       weekIds: [],
-      steps: [
-        ["01", "문제 정의"],
-        ["02", "데이터 수집"],
-        ["03", "프로토타입 제작"],
-        ["04", " DEMO - Day"],
-      ],
     },
   },
 ] as const satisfies readonly CurriculumPhase[];

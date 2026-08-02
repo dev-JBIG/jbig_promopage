@@ -117,6 +117,7 @@ export default function CurriculumShowcase() {
   const hasSchedule = schedule.length > 0;
   const showsAnalysisFlow = activePhase?.tone === "analysis";
   const showsChallengeArena = activePhase?.tone === "challenge";
+  const showsStudioStatement = activePhase?.tone === "studio";
   const hasStandardSchedule = hasSchedule && !showsAnalysisFlow;
   const challengeHeadlineLines = showsChallengeArena
     ? activePhase.detail.headline.split(". ").map((line, index, lines) => index < lines.length - 1 ? `${line}.` : line)
@@ -213,6 +214,17 @@ export default function CurriculumShowcase() {
                 </div>
                 <ChallengeArenaVisual />
               </div>
+            ) : showsStudioStatement ? (
+              <div className="phase-modal-copy studio-statement">
+                <h3>
+                  {activePhase.detail.headline.split("\n").map((line, index) => (
+                    <span className={index === 0 ? "studio-statement-lead" : "studio-statement-main"} key={line}>
+                      {line}
+                    </span>
+                  ))}
+                </h3>
+                <p id={noteId}>{activePhase.detail.note}</p>
+              </div>
             ) : (
               <div className="phase-modal-copy">
                 <h3>{activePhase.detail.headline}</h3>
@@ -232,37 +244,6 @@ export default function CurriculumShowcase() {
               </ol>
             ) : null}
 
-            {activePhase.detail.steps.length > 0 ? (
-              <ol className="project-ascent" aria-label={curriculumContent.studioStepsAriaLabel}>
-                <svg className="project-route project-route-desktop" viewBox="0 0 1000 240" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="project-route-desktop-gradient" x1="0%" y1="100%" x2="100%" y2="0%">
-                      <stop offset="0" stopColor="#3fd4c7" />
-                      <stop offset="0.5" stopColor="#37add4" />
-                      <stop offset="1" stopColor="#315bd8" />
-                    </linearGradient>
-                  </defs>
-                  <path className="project-route-glow" d="M45 214 C150 214 170 195 250 184 C340 171 375 162 465 148 C555 134 590 120 675 107 C770 92 805 60 955 44" />
-                  <path d="M45 214 C150 214 170 195 250 184 C340 171 375 162 465 148 C555 134 590 120 675 107 C770 92 805 60 955 44" />
-                </svg>
-                <svg className="project-route project-route-mobile" viewBox="0 0 80 400" preserveAspectRatio="none" aria-hidden="true">
-                  <defs>
-                    <linearGradient id="project-route-mobile-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0" stopColor="#3fd4c7" />
-                      <stop offset="0.5" stopColor="#37add4" />
-                      <stop offset="1" stopColor="#315bd8" />
-                    </linearGradient>
-                  </defs>
-                  <path className="project-route-glow" d="M40 18 C40 70 22 82 36 122 C52 168 56 178 40 216 C24 258 24 274 40 306 C56 338 50 362 40 382" />
-                  <path d="M40 18 C40 70 22 82 36 122 C52 168 56 178 40 216 C24 258 24 274 40 306 C56 338 50 362 40 382" />
-                </svg>
-                {activePhase.detail.steps.map(([, label]) => (
-                  <li key={label}>
-                    <strong>{label}</strong>
-                  </li>
-                ))}
-              </ol>
-            ) : null}
           </section>
         </div>,
         document.body,
