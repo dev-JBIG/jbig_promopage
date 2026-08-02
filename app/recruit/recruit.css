@@ -789,6 +789,13 @@ article.phase-card .phase-overview { height: 100%; }
   line-height: 1.4;
 }
 
+.phase-modal-with-schedule .phase-modal-schedule {
+  flex: 1;
+  margin-top: clamp(44px, 6vh, 64px);
+  padding-top: 0;
+  grid-auto-rows: minmax(210px, 1fr);
+}
+
 @keyframes phaseModalBackdropIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -1711,6 +1718,8 @@ article.phase-card .phase-overview { height: 100%; }
   .phase-modal-challenge .phase-modal-copy { margin-top: auto; margin-bottom: auto; }
   .phase-modal-schedule { margin-top: 36px; padding-top: 0; grid-template-columns: 1fr; }
   .phase-modal-schedule li { min-height: 128px; padding: 18px; border-radius: 20px; }
+  .phase-modal-with-schedule .phase-modal-schedule { flex: 0 0 auto; margin-top: 36px; grid-auto-rows: auto; }
+  .phase-modal-with-schedule .phase-modal-schedule li { min-height: 156px; }
   .phase-modal-schedule li > strong { margin-top: 13px; font-size: 17px; }
   .phase-modal-schedule li > p { margin-top: 14px; }
   .phase-modal-studio { padding-bottom: 250px; }

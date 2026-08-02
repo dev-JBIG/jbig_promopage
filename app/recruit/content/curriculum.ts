@@ -95,8 +95,8 @@ export type CurriculumPhase = {
   description: string;
   tone: CurriculumPhaseTone;
   detail: {
-    headline: string;
-    note: string;
+    headline: string | null;
+    note: string | null;
     weekIds: readonly CurriculumWeekId[];
     steps: readonly (readonly [string, string])[];
   };
@@ -110,8 +110,8 @@ export const curriculumPhases = [
     description: "현실 데이터로 배우는 빅데이터 분석과정",
     tone: "analysis",
     detail: {
-      headline: "분석의 기본을, 직접 해보며 익힙니다.",
-      note: "공통 데이터와 누적형 코드 과제로 분석의 흐름을 만듭니다.",
+      headline: null,
+      note: null,
       weekIds: ["01", "02", "03", "04"],
       steps: [],
     },
@@ -136,8 +136,8 @@ export const curriculumPhases = [
     description: "개념 이해부터, 실제로 적용해보는 프로젝트까지.",
     tone: "deep-learning",
     detail: {
-      headline: "개념을 보고, 직접 작동시킵니다.",
-      note: "핵심 개념을 예제와 선택형 실습으로 연결합니다.",
+      headline: null,
+      note: null,
       weekIds: ["06", "07", "08"],
       steps: [],
     },
@@ -154,9 +154,9 @@ export const curriculumPhases = [
       weekIds: [],
       steps: [
         ["01", "문제 정의"],
-        ["02", "데이터"],
+        ["02", "데이터 수집"],
         ["03", "프로토타입"],
-        ["04", "데모데이"],
+        ["04", " DEMO - Day"],
       ],
     },
   },

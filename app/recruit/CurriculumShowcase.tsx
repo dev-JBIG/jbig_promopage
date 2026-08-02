@@ -63,6 +63,8 @@ export default function CurriculumShowcase() {
   };
 
   const schedule = activePhase ? getSchedule(activePhase) : [];
+  const hasSchedule = schedule.length > 0;
+  const hasCopy = Boolean(activePhase?.detail.headline && activePhase.detail.note);
   const titleId = activePhase ? `phase-modal-title-${activePhase.tone}` : undefined;
   const noteId = activePhase ? `phase-modal-note-${activePhase.tone}` : undefined;
 
@@ -110,11 +112,11 @@ export default function CurriculumShowcase() {
           } as CSSProperties}
         >
           <section
-            className={`phase-modal-panel phase-modal-${activePhase.tone}`}
+            className={`phase-modal-panel phase-modal-${activePhase.tone}${hasSchedule ? " phase-modal-with-schedule" : ""}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            aria-describedby={noteId}
+            aria-describedby={hasCopy ? noteId : undefined}
           >
             <button
               className="phase-modal-close"
@@ -129,16 +131,18 @@ export default function CurriculumShowcase() {
             <header className="phase-modal-header">
               <span className="phase-modal-range"><small>{curriculumContent.weekLabel}</small><strong>{activePhase.range}</strong></span>
               <div>
-                <strong>{activePhase.title}</strong>
+                <strong id={titleId}>{activePhase.title}</strong>
               </div>
             </header>
 
-            <div className="phase-modal-copy">
-              <h3 id={titleId}>{activePhase.detail.headline}</h3>
-              <p id={noteId}>{activePhase.detail.note}</p>
-            </div>
+            {hasCopy ? (
+              <div className="phase-modal-copy">
+                <h3>{activePhase.detail.headline}</h3>
+                <p id={noteId}>{activePhase.detail.note}</p>
+              </div>
+            ) : null}
 
-            {schedule.length > 0 ? (
+            {hasSchedule ? (
               <ol className="phase-modal-schedule" aria-label={`${activePhase.title} ${curriculumContent.scheduleAriaLabelSuffix}`}>
                 {schedule.map((week) => (
                   <li key={week.week}>

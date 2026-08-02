@@ -32,7 +32,7 @@ export const recruitPageContent = {
   about: {
     heading: ["JBIG가 무슨", "약자인가요?"],
     acronymAriaLabel: "JBIG 이름의 의미",
-    activityHeading: "우리가 하는 활동",
+    activityHeading: "저희는 이런 걸 공부해요.",
   },
   fit: {
     heading: ["이런 당신을", "기다리고 있어요."],

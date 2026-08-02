@@ -11,6 +11,11 @@ npm install
 npm run dev
 ```
 
+모집 페이지는 `http://127.0.0.1:3000/recruit`에서 확인합니다. `npm run dev`는
+IPv4 루프백에 고정되어 macOS의 `localhost`가 IPv6로 해석되는 경우에도 같은
+주소를 사용합니다. 인터랙션 확인에는 `npm start`가 아니라 개발 서버를
+사용합니다. 운영용 `/recruit/assets/` 경로는 nginx 배포 번들을 전제로 합니다.
+
 ## 검증
 
 ```bash
