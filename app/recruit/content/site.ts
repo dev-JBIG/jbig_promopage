@@ -1,6 +1,6 @@
 export const recruitPageContent = {
   metadata: {
-    title: "JBIG 모집 | 호기심이 팀이 되는 곳",
+    title: "JBIG 모집 | 호기심이 결과가 되는 곳",
     description: "함께 배우고, 만들고, 도전하는 전북대학교 데이터 분석 동아리 JBIG의 모집 페이지입니다.",
     canonicalUrl: "https://jbig.co.kr/recruit",
     siteName: "JBIG",
@@ -25,12 +25,12 @@ export const recruitPageContent = {
     ],
   },
   hero: {
-    heading: ["호기심이", "팀이 되는 곳."],
-    subtitle: "전북대학교 데이터 분석 동아리 JBIG",
+    heading: ["호기심이", "결과가 되는 곳."],
+    subtitle: "전북대학교 데이터 분석 동아리",
     scrollLabel: "JBIG 더 알아보기",
   },
   about: {
-    heading: ["JBIG가 무슨", "약자인가요?"],
+    heading: ["JBIG는 무슨", "약자인가요?"],
     acronymAriaLabel: "JBIG 이름의 의미",
     activityHeading: "저희는 이런 걸 공부해요.",
   },
@@ -62,7 +62,7 @@ export const activityAreas = ["데이터 사이언스", "딥러닝", "머신러�
 export const fitStatements = [
   "궁금한 건 직접 해봐야 직성이 풀리는 사람",
   "혼자보다 팀에서 더 멀리 가고 싶은 사람",
-  "완성한 것을 밖으로 꺼내 보여주고 싶은 사람",
+  "완성한 결과물을 함께 공유하고, 성장하고 싶은 사람",
 ] as const;
 
 export type FaqItem = {

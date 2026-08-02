@@ -1,5 +1,5 @@
 export const awardsContent = {
-  heading: ["도전은,", "기록으로 남습니다."],
+  heading: ["JBIG 의 도전은,", "언제나 진행 중"],
   description: ["해커톤부터 AI 경진대회, 논문과 창업까지.", "JBIG의 도전은 결과로 이어져 왔습니다."],
   summaryAriaLabel: "수상경력 요약",
   recordLabel: "RECORDS",

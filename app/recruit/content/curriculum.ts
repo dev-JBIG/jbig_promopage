@@ -95,8 +95,8 @@ export type CurriculumPhase = {
   description: string;
   tone: CurriculumPhaseTone;
   detail: {
-    headline: string | null;
-    note: string | null;
+    headline: string;
+    note: string;
     weekIds: readonly CurriculumWeekId[];
     steps: readonly (readonly [string, string])[];
   };
@@ -110,8 +110,8 @@ export const curriculumPhases = [
     description: "현실 데이터로 배우는 빅데이터 분석과정",
     tone: "analysis",
     detail: {
-      headline: null,
-      note: null,
+      headline: "분석의 기본을, 직접 해보며 익힙니다.",
+      note: "공통 데이터와 누적형 코드 과제로 분석의 흐름을 만듭니다.",
       weekIds: ["01", "02", "03", "04"],
       steps: [],
     },
@@ -123,8 +123,8 @@ export const curriculumPhases = [
     description: "제대로 경험해보는 DATA X ML 분석대회",
     tone: "challenge",
     detail: {
-      headline: "점수를 올린 이유까지, 설명할 수 있게.",
-      note: "리더보드 경쟁을 검증과 회고까지 이어가는 실전 분석전",
+      headline: "누구나 다 계획이 있죠. 당하기 전까지는.",
+      note: "실제 Kaggle, Dacon 대회와 동일하게 설계된 대회로, 개념을 넘어 응용까지.",
       weekIds: [],
       steps: [],
     },
@@ -136,8 +136,8 @@ export const curriculumPhases = [
     description: "개념 이해부터, 실제로 적용해보는 프로젝트까지.",
     tone: "deep-learning",
     detail: {
-      headline: null,
-      note: null,
+      headline: "이해부터 응용까지 한 번에",
+      note: "최신 트렌드의 기술들을 활용해서, 결과물을 만들어볼 기회",
       weekIds: ["06", "07", "08"],
       steps: [],
     },
@@ -149,13 +149,13 @@ export const curriculumPhases = [
     description: "한 학기의 노력을 당당하게 제출할 수 있는 포트폴리오로 만들어보아요.",
     tone: "studio",
     detail: {
-      headline: "분석을 끝내지 않고, 작동하는 결과물로.",
+      headline: "전공과 연결해서 풀어내보는 취업 대비 포트폴리오 프로젝트.",
       note: "팀의 질문을 프로토타입과 발표로 완성하는 제작 스튜디오",
       weekIds: [],
       steps: [
         ["01", "문제 정의"],
         ["02", "데이터 수집"],
-        ["03", "프로토타입"],
+        ["03", "프로토타입 제작"],
         ["04", " DEMO - Day"],
       ],
     },

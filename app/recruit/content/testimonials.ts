@@ -1,5 +1,5 @@
 export const testimonialsContent = {
-  heading: ["배운 것은", "어디까지 이어졌을까요."],
+  heading: ["선배들의", "성장 스토리"],
   description: ["수료자들이 직접 들려주는", "JBIG 이후의 변화."],
   listAriaLabel: "JBIG 동아리원 후기",
   profileAltSuffix: "프로필",

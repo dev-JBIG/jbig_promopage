@@ -21,6 +21,24 @@ function getWeekFocus(week: (typeof curriculumWeeks)[number]) {
   return source.split(" · ").slice(0, 2).join(" · ");
 }
 
+function AnalysisFocusFlow() {
+  return (
+    <div
+      className="analysis-focus-flow"
+      role="img"
+      aria-label="추상화한 데이터가 굵은 흐름으로 하나의 구에 모인 뒤 분석 그래프로 이어지는 과정"
+    >
+      <span className="analysis-data-source" aria-hidden="true"><i /><i /><i /><i /><i /></span>
+      <span className="analysis-focus-stream" aria-hidden="true" />
+      <span className="analysis-focus-orb-stage" aria-hidden="true">
+        <span className="analysis-focus-orb"><i /></span>
+      </span>
+      <span className="analysis-focus-arrow" aria-hidden="true" />
+      <span className="analysis-focus-chart" aria-hidden="true"><i /><i /><i /><i /><i /></span>
+    </div>
+  );
+}
+
 export default function CurriculumShowcase() {
   const [activeTone, setActiveTone] = useState<CurriculumPhaseTone | null>(null);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
@@ -64,7 +82,8 @@ export default function CurriculumShowcase() {
 
   const schedule = activePhase ? getSchedule(activePhase) : [];
   const hasSchedule = schedule.length > 0;
-  const hasCopy = Boolean(activePhase?.detail.headline && activePhase.detail.note);
+  const showsAnalysisFlow = activePhase?.tone === "analysis";
+  const hasStandardSchedule = hasSchedule && !showsAnalysisFlow;
   const titleId = activePhase ? `phase-modal-title-${activePhase.tone}` : undefined;
   const noteId = activePhase ? `phase-modal-note-${activePhase.tone}` : undefined;
 
@@ -112,11 +131,11 @@ export default function CurriculumShowcase() {
           } as CSSProperties}
         >
           <section
-            className={`phase-modal-panel phase-modal-${activePhase.tone}${hasSchedule ? " phase-modal-with-schedule" : ""}`}
+            className={`phase-modal-panel phase-modal-${activePhase.tone}${hasStandardSchedule ? " phase-modal-with-schedule" : ""}`}
             role="dialog"
             aria-modal="true"
             aria-labelledby={titleId}
-            aria-describedby={hasCopy ? noteId : undefined}
+            aria-describedby={showsAnalysisFlow ? undefined : noteId}
           >
             <button
               className="phase-modal-close"
@@ -135,12 +154,12 @@ export default function CurriculumShowcase() {
               </div>
             </header>
 
-            {hasCopy ? (
+            {showsAnalysisFlow ? <AnalysisFocusFlow /> : (
               <div className="phase-modal-copy">
                 <h3>{activePhase.detail.headline}</h3>
                 <p id={noteId}>{activePhase.detail.note}</p>
               </div>
-            ) : null}
+            )}
 
             {hasSchedule ? (
               <ol className="phase-modal-schedule" aria-label={`${activePhase.title} ${curriculumContent.scheduleAriaLabelSuffix}`}>

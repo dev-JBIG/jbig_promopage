@@ -228,6 +228,16 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(curriculumShowcase, /phase\.detail\.weekIds/);
   assert.match(curriculumShowcase, /curriculumWeeks\.filter/);
   assert.doesNotMatch(curriculumShowcase, /const (?:modalHeadlines|modalNotes|studioSteps)\b/);
+  assert.match(curriculumShowcase, /className="analysis-focus-flow"/);
+  assert.match(curriculumShowcase, /className="analysis-focus-stream"/);
+  assert.match(curriculumShowcase, /analysis-data-source[^\n]*<i \/><i \/><i \/><i \/><i \/>/);
+  assert.match(recruitCss, /\.analysis-focus-stream/);
+  assert.doesNotMatch(curriculumShowcase, /analysis-focus-ribbons/);
+  assert.match(curriculumShowcase, /className="analysis-focus-orb-stage"/);
+  assert.match(recruitCss, /\.analysis-focus-orb/);
+  assert.match(recruitCss, /\.analysis-focus-arrow/);
+  assert.match(recruitCss, /\.analysis-focus-chart/);
+  assert.match(recruitCss, /\.phase-modal-analysis \.phase-modal-schedule/);
   assert.match(curriculumShowcase, /phase-modal-with-schedule/);
   assert.match(recruitCss, /\.phase-modal-with-schedule \.phase-modal-schedule\s*\{[^}]*flex:\s*1[^}]*grid-auto-rows:\s*minmax\(210px,\s*1fr\)/s);
   assert.match(curriculumShowcase, /className="project-ascent"/);
@@ -252,6 +262,18 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
     assert.rejects(access(new URL("../app/recruit/content.ts", import.meta.url))),
     assert.rejects(access(new URL("../app/recruit/awards.ts", import.meta.url))),
   ]);
+});
+
+test("server-renders three curriculum flow demos", async () => {
+  const response = await render("/recruit/curriculum-flow-lab");
+  assert.equal(response.status, 200);
+
+  const html = await response.text();
+  assert.equal((html.match(/data-flow-demo=/g) ?? []).length, 3);
+  for (const stage of ["data", "topic", "analysis"]) {
+    assert.equal((html.match(new RegExp(`data-flow-stage="${stage}"`, "g")) ?? []).length, 3);
+  }
+  assert.doesNotMatch(html, /<svg\b/i);
 });
 
 test("server-renders three JBIG awards motion demos", async () => {
