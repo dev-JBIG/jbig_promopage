@@ -598,6 +598,11 @@ article.phase-card .phase-overview { height: 100%; }
 .phase-modal-backdrop *::before,
 .phase-modal-backdrop *::after { box-sizing: border-box; }
 
+.phase-modal-backdrop[data-phase-modal="challenge"] {
+  background: rgba(8, 22, 60, 0.58);
+  backdrop-filter: blur(18px) saturate(92%);
+}
+
 .phase-modal-panel {
   position: relative;
   width: min(1040px, calc(100vw - 48px));
@@ -628,7 +633,43 @@ article.phase-card .phase-overview { height: 100%; }
 }
 
 .phase-modal-analysis { background: linear-gradient(145deg, #c8f6ee, #eefbfa 62%, #dbe8ff); }
-.phase-modal-challenge { color: #fff; background: linear-gradient(125deg, #19398e, #3f67d2 58%, #6f9cf5); }
+.phase-modal-challenge {
+  width: min(1440px, calc(100vw - 48px));
+  height: min(780px, calc(100svh - 48px));
+  min-height: min(620px, calc(100svh - 48px));
+  padding: clamp(44px, 4vw, 60px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 36px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 78% 35%, rgba(112, 184, 255, 0.72), transparent 35%),
+    radial-gradient(circle at 92% 92%, rgba(116, 232, 211, 0.2), transparent 28%),
+    linear-gradient(112deg, #102b72 0%, #1d3f94 48%, #396fd1 100%);
+  box-shadow: 0 42px 110px rgba(12, 31, 82, 0.42), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  animation-name: challengeModalExpandIn;
+  animation-duration: 500ms;
+}
+
+.phase-modal-challenge::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: 0 0 0 46%;
+  opacity: 0.16;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.16) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: radial-gradient(circle at 55% 48%, #000 8%, transparent 72%);
+}
+
+.phase-modal-challenge::after {
+  top: 8%;
+  right: 8%;
+  width: 44%;
+  background: rgba(100, 178, 255, 0.26);
+  filter: blur(46px);
+}
 .phase-modal-deep-learning { background: linear-gradient(145deg, #d5e0ff, #f2f6ff 68%, #dff8f3); }
 .phase-modal-studio {
   padding-bottom: 270px;
@@ -650,7 +691,28 @@ article.phase-card .phase-overview { height: 100%; }
   cursor: pointer;
 }
 
-.phase-modal-challenge .phase-modal-close { background: rgba(255, 255, 255, 0.16); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.26); }
+.phase-modal-challenge .phase-modal-close {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+  backdrop-filter: blur(12px);
+  transition: background 260ms ease, box-shadow 260ms ease, transform 260ms ease;
+}
+
+.phase-modal-challenge .phase-modal-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.42);
+  transform: scale(1.04);
+}
+
+.phase-modal-challenge .phase-modal-close i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  animation: arenaCloseRotate 280ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
 .phase-modal-close:focus-visible { outline: 3px solid var(--aqua); outline-offset: 4px; }
 
 .phase-modal-close i::before,
@@ -669,6 +731,8 @@ article.phase-card .phase-overview { height: 100%; }
 .phase-modal-close i::after { transform: translate(-50%, -50%) rotate(-45deg); }
 
 .phase-modal-header {
+  position: relative;
+  z-index: 2;
   padding-right: 70px;
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);
@@ -741,6 +805,139 @@ article.phase-card .phase-overview { height: 100%; }
 .phase-modal-challenge .phase-modal-copy { margin-top: auto; margin-bottom: auto; }
 .phase-modal-challenge .phase-modal-copy h3 { color: #fff; }
 .phase-modal-challenge .phase-modal-copy p { color: rgba(255, 255, 255, 0.7); }
+
+.challenge-arena-layout {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  min-height: 0;
+  margin-top: clamp(44px, 6vh, 66px);
+  display: grid;
+  grid-template-columns: minmax(0, 0.98fr) minmax(560px, 1.02fr);
+  gap: clamp(30px, 3.25vw, 52px);
+  align-items: center;
+}
+
+.challenge-arena-copy {
+  max-width: none;
+  margin: 0;
+  padding-left: clamp(10px, 1.5vw, 24px);
+  animation: arenaContentIn 440ms 130ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.challenge-arena-copy h3 {
+  font-size: clamp(52px, 4.5vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -0.06em;
+}
+
+.challenge-headline-line { display: block; }
+
+.challenge-arena-copy .challenge-supporting-copy {
+  max-width: 26em;
+  margin: 38px 0 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(27px, 2vw, 31px);
+  font-weight: 680;
+  line-height: 1.4;
+  letter-spacing: -0.035em;
+}
+
+.challenge-supporting-copy span,
+.challenge-arena-note span { display: block; }
+
+.challenge-keywords {
+  margin: 24px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  color: #9ff1e5;
+  font-size: 15px;
+  font-weight: 780;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  list-style: none;
+}
+
+.challenge-keywords li + li::before {
+  content: "·";
+  margin-right: 12px;
+  color: rgba(255, 255, 255, 0.42);
+}
+
+.challenge-arena-copy .challenge-arena-note {
+  max-width: 34em;
+  margin: 32px 0 0;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 17px;
+  font-weight: 620;
+  line-height: 1.65;
+}
+
+.arena-visual-shell {
+  position: relative;
+  min-width: 0;
+  min-height: 430px;
+  display: grid;
+  align-items: center;
+  animation: arenaContentIn 500ms 180ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.arena-experience-curve {
+  position: relative;
+  width: 100%;
+  background: repeating-linear-gradient(to top, rgba(255, 255, 255, 0.07) 0 1px, transparent 1px 74px);
+}
+
+.arena-experience-curve svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.arena-plan-line {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.3);
+  stroke-width: 2;
+  stroke-dasharray: 9 11;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.arena-experience-line {
+  fill: none;
+  stroke: url("#arena-experience-gradient");
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 8px 10px rgba(80, 225, 207, 0.3));
+  vector-effect: non-scaling-stroke;
+}
+
+.arena-experience-points circle {
+  fill: #12357f;
+  stroke: #8de9dd;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.arena-experience-points .arena-experience-end {
+  fill: #f4fffd;
+  stroke: #96eee1;
+  filter: drop-shadow(0 0 10px rgba(150, 238, 225, 0.82));
+}
+
+@keyframes arenaContentIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes arenaCloseRotate {
+  from { opacity: 0; transform: rotate(-45deg) scale(0.82); }
+  to { opacity: 1; transform: rotate(0) scale(1); }
+}
 
 .analysis-focus-flow {
   --analysis-orb-size: clamp(112px, 13vw, 142px);
@@ -1062,6 +1259,16 @@ article.phase-card .phase-overview { height: 100%; }
   }
   68% { opacity: 1; filter: blur(0); transform: translate(0, 0) scale(1.018); }
   100% { opacity: 1; border-radius: 48px; filter: blur(0); transform: translate(0, 0) scale(1); }
+}
+
+@keyframes challengeModalExpandIn {
+  0% {
+    border-radius: 999px;
+    filter: blur(7px);
+    transform: translate(var(--modal-from-x), var(--modal-from-y)) scale(0.08);
+  }
+  68% { border-radius: 34px; filter: blur(0); transform: translate(0, 0) scale(1.012); }
+  100% { border-radius: 36px; filter: blur(0); transform: translate(0, 0) scale(1); }
 }
 
 .project-ascent {
@@ -1898,6 +2105,22 @@ article.phase-card .phase-overview { height: 100%; }
   100% { background-position: 100% 55%; filter: saturate(1.06) drop-shadow(0 0 13px rgba(120, 156, 255, 0.34)) drop-shadow(0 14px 28px rgba(47, 91, 216, 0.17)); }
 }
 
+@media (max-width: 1220px) {
+  .phase-modal-challenge {
+    height: min(860px, calc(100svh - 48px));
+  }
+
+  .challenge-arena-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .challenge-arena-copy { padding-left: 0; }
+  .challenge-arena-copy h3 { font-size: clamp(48px, 6.2vw, 62px); }
+  .arena-visual-shell { min-height: 360px; }
+  .arena-experience-curve { width: min(100%, 620px); justify-self: center; }
+}
+
 @media (max-width: 760px) {
   .recruit-nav { height: 60px; grid-template-columns: 1fr auto; padding: 0 18px; }
   .recruit-nav-links { display: none; }
@@ -1959,6 +2182,15 @@ article.phase-card .phase-overview { height: 100%; }
   }
   .phase-modal-panel::after { top: -120px; right: -150px; width: 360px; }
   .phase-modal-close { top: 20px; right: 20px; width: 44px; height: 44px; }
+  .phase-modal-challenge {
+    width: 100%;
+    height: calc(100svh - 24px);
+    min-height: calc(100svh - 24px);
+    padding: 30px 22px;
+    border-radius: 30px;
+  }
+  .phase-modal-challenge::before { inset: 0; }
+  .phase-modal-challenge .phase-modal-close { width: 44px; height: 44px; border-radius: 14px; }
   .phase-modal-header { padding-right: 50px; grid-template-columns: 58px minmax(0, 1fr); gap: 14px; }
   .phase-modal-range { gap: 7px; }
   .phase-modal-range small { padding: 5px 7px; font-size: 8px; }
@@ -1968,6 +2200,14 @@ article.phase-card .phase-overview { height: 100%; }
   .phase-modal-copy h3 { font-size: clamp(35px, 10.4vw, 43px); }
   .phase-modal-copy p { margin-top: 16px; font-size: 11px; }
   .phase-modal-challenge .phase-modal-copy { margin-top: auto; margin-bottom: auto; }
+  .challenge-arena-layout { margin-top: 34px; grid-template-columns: 1fr; gap: 30px; }
+  .challenge-arena-copy { margin: 0; }
+  .challenge-arena-copy h3 { font-size: clamp(35px, 10.4vw, 43px); line-height: 1.04; }
+  .challenge-arena-copy .challenge-supporting-copy { margin-top: 24px; font-size: 21px; line-height: 1.42; }
+  .challenge-keywords { margin-top: 18px; gap: 6px 9px; font-size: 13px; }
+  .challenge-keywords li + li::before { margin-right: 9px; }
+  .challenge-arena-copy .challenge-arena-note { max-width: 29em; margin-top: 24px; font-size: 14px; line-height: 1.6; }
+  .arena-visual-shell { min-height: 250px; }
   .analysis-focus-flow {
     --analysis-orb-size: 62px;
     --analysis-orb-radius: 31px;
@@ -2061,6 +2301,7 @@ article.phase-card .phase-overview { height: 100%; }
 @media (max-width: 390px) {
   .recruit-nav-cta { padding: 8px 10px; }
   .liquid-logo { margin-bottom: 36px; }
+  .challenge-arena-copy h3 { font-size: 32px; letter-spacing: -0.07em; }
   .mini-mascot { filter: drop-shadow(0 8px 10px rgba(70, 43, 24, 0.08)); }
   .testimonial-story { padding-block: 48px; }
 }
@@ -2084,6 +2325,9 @@ article.phase-card .phase-overview { height: 100%; }
   .awards-group.is-clone { display: none; }
   .phase-modal-backdrop,
   .phase-modal-panel { animation: none !important; }
+  .challenge-arena-copy,
+  .arena-visual-shell,
+  .phase-modal-challenge .phase-modal-close i { animation: none !important; }
   .analysis-focus-orb,
   .analysis-focus-chart i { animation: none !important; }
 }

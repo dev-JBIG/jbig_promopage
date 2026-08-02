@@ -39,12 +39,45 @@ function AnalysisFocusFlow() {
   );
 }
 
+function ChallengeArenaVisual() {
+  return (
+    <div
+      className="arena-visual-shell"
+      role="img"
+      aria-label="계획은 곧은 점선이지만 실제 경험은 여러 번의 시도와 굴곡을 거쳐 나아가는 모습"
+    >
+      <div className="arena-experience-curve" aria-hidden="true">
+        <svg viewBox="0 0 560 330" preserveAspectRatio="xMidYMid meet">
+          <defs>
+            <linearGradient id="arena-experience-gradient" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stopColor="#7be7db" />
+              <stop offset="1" stopColor="#ffffff" />
+            </linearGradient>
+          </defs>
+          <path className="arena-plan-line" d="M38 310 L522 20" />
+          <polyline className="arena-experience-line" points="38,310 112,250 174,296 244,174 304,236 374,92 428,146 522,20" />
+          <g className="arena-experience-points">
+            <circle cx="38" cy="310" r="6" />
+            <circle cx="112" cy="250" r="6" />
+            <circle cx="174" cy="296" r="6" />
+            <circle cx="244" cy="174" r="6" />
+            <circle cx="304" cy="236" r="6" />
+            <circle cx="374" cy="92" r="6" />
+            <circle cx="428" cy="146" r="6" />
+            <circle className="arena-experience-end" cx="522" cy="20" r="9" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  );
+}
+
 export default function CurriculumShowcase() {
   const [activeTone, setActiveTone] = useState<CurriculumPhaseTone | null>(null);
   const [origin, setOrigin] = useState({ x: 0, y: 0 });
   const triggerRef = useRef<HTMLButtonElement | null>(null);
   const closeButtonRef = useRef<HTMLButtonElement | null>(null);
-  const activePhase = curriculumPhases.find((phase) => phase.tone === activeTone) ?? null;
+  const activePhase: CurriculumPhase | null = curriculumPhases.find((phase) => phase.tone === activeTone) ?? null;
 
   useEffect(() => {
     if (!activePhase) return;
@@ -83,7 +116,11 @@ export default function CurriculumShowcase() {
   const schedule = activePhase ? getSchedule(activePhase) : [];
   const hasSchedule = schedule.length > 0;
   const showsAnalysisFlow = activePhase?.tone === "analysis";
+  const showsChallengeArena = activePhase?.tone === "challenge";
   const hasStandardSchedule = hasSchedule && !showsAnalysisFlow;
+  const challengeHeadlineLines = showsChallengeArena
+    ? activePhase.detail.headline.split(". ").map((line, index, lines) => index < lines.length - 1 ? `${line}.` : line)
+    : [];
   const titleId = activePhase ? `phase-modal-title-${activePhase.tone}` : undefined;
   const noteId = activePhase ? `phase-modal-note-${activePhase.tone}` : undefined;
 
@@ -154,7 +191,29 @@ export default function CurriculumShowcase() {
               </div>
             </header>
 
-            {showsAnalysisFlow ? <AnalysisFocusFlow /> : (
+            {showsAnalysisFlow ? <AnalysisFocusFlow /> : showsChallengeArena ? (
+              <div className="challenge-arena-layout">
+                <div className="phase-modal-copy challenge-arena-copy">
+                  <h3>
+                    {challengeHeadlineLines.map((line) => <span className="challenge-headline-line" key={line}>{line}</span>)}
+                  </h3>
+                  {activePhase.detail.supportingLines ? (
+                    <p className="challenge-supporting-copy">
+                      {activePhase.detail.supportingLines.map((line) => <span key={line}>{line}</span>)}
+                    </p>
+                  ) : null}
+                  {activePhase.detail.keywords ? (
+                    <ul className="challenge-keywords" aria-label="데이터 대회에서 필요한 과정">
+                      {activePhase.detail.keywords.map((keyword) => <li key={keyword}>{keyword}</li>)}
+                    </ul>
+                  ) : null}
+                  <p className="challenge-arena-note" id={noteId}>
+                    {(activePhase.detail.noteLines ?? [activePhase.detail.note]).map((line) => <span key={line}>{line}</span>)}
+                  </p>
+                </div>
+                <ChallengeArenaVisual />
+              </div>
+            ) : (
               <div className="phase-modal-copy">
                 <h3>{activePhase.detail.headline}</h3>
                 <p id={noteId}>{activePhase.detail.note}</p>

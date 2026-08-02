@@ -97,6 +97,9 @@ export type CurriculumPhase = {
   detail: {
     headline: string;
     note: string;
+    noteLines?: readonly string[];
+    supportingLines?: readonly string[];
+    keywords?: readonly string[];
     weekIds: readonly CurriculumWeekId[];
     steps: readonly (readonly [string, string])[];
   };
@@ -124,7 +127,16 @@ export const curriculumPhases = [
     tone: "challenge",
     detail: {
       headline: "누구나 다 계획이 있죠. 당하기 전까지는.",
+      supportingLines: [
+        "배운 개념이 점수가 되기까지,",
+        "반복된 검증과 판단이 필요합니다.",
+      ],
+      keywords: ["검증 설계", "실험", "실패 복기", "제출 판단"],
       note: "실제 Kaggle, Dacon 대회와 동일하게 설계된 대회로, 개념을 넘어 응용까지.",
+      noteLines: [
+        "실제 Kaggle, Dacon 대회와 동일하게 설계된 대회로,",
+        "개념을 넘어 응용까지.",
+      ],
       weekIds: [],
       steps: [],
     },
