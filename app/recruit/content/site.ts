@@ -17,11 +17,11 @@ export const recruitPageContent = {
   navigation: {
     ariaLabel: "JBIG 모집 페이지 주요 메뉴",
     items: [
-      { href: "#about", label: "JBIG 소개" },
-      { href: "#curriculum", label: "8주 교안" },
-      { href: "#testimonials", label: "동아리원 후기" },
-      { href: "#awards", label: "수상경력" },
-      { href: "#fit", label: "잘 맞는 사람" },
+      { href: "#about", label: "About us" },
+      { href: "#curriculum", label: "Curriculum" },
+      { href: "#testimonials", label: "Alumini Message" },
+      { href: "#awards", label: "Awards History" },
+      { href: "#fit", label: "Fit" },
     ],
   },
   hero: {
