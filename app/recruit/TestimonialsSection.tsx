@@ -1,11 +1,9 @@
 import Image from "next/image";
 import { testimonialItems, testimonialsContent, type TestimonialItem } from "./content";
 
-function TestimonialStory({ testimonial, index }: { testimonial: TestimonialItem; index: number }) {
+function TestimonialStory({ testimonial }: { testimonial: TestimonialItem }) {
   return (
     <article className="testimonial-story">
-      <span className="testimonial-story-number">{String(index + 1).padStart(2, "0")}</span>
-
       <div className="testimonial-author">
         {testimonial.profileImage ? (
           <Image
@@ -23,9 +21,11 @@ function TestimonialStory({ testimonial, index }: { testimonial: TestimonialItem
         </div>
       </div>
 
-      <div className="testimonial-story-copy">
-        <blockquote>“{testimonial.highlight}”</blockquote>
-        <p>{testimonial.review}</p>
+      <div className="testimonial-message-shell">
+        <div className="testimonial-story-copy">
+          <blockquote>“{testimonial.highlight}”</blockquote>
+          <p>{testimonial.review}</p>
+        </div>
       </div>
     </article>
   );
@@ -43,8 +43,8 @@ export default function TestimonialsSection() {
         </header>
 
         <div className="testimonial-list" aria-label={testimonialsContent.listAriaLabel}>
-          {testimonialItems.map((testimonial, index) => (
-            <TestimonialStory key={testimonial.id} testimonial={testimonial} index={index} />
+          {testimonialItems.map((testimonial) => (
+            <TestimonialStory key={testimonial.id} testimonial={testimonial} />
           ))}
         </div>
       </div>

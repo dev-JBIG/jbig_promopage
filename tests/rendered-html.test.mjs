@@ -202,15 +202,20 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   );
   assert.doesNotMatch(`${recruitPage}\n${awardsRibbon}\n${testimonialsSection}`, /section-kicker|hero-kicker/);
   assert.doesNotMatch(curriculumShowcase, /activePhase\.label/);
-  assert.match(recruitCss, /\.testimonial-list/);
+  assert.match(recruitCss, /\.testimonial-list\s*\{[^}]*display:\s*grid[^}]*gap:\s*clamp\(48px,\s*4\.5vw,\s*68px\)/s);
+  assert.doesNotMatch(recruitCss, /\.testimonial-list\s*\{[^}]*border-bottom\s*:/s);
   assert.match(recruitCss, /\.testimonial-story\s*\{[^}]*grid-template-columns:\s*repeat\(12,\s*minmax\(0,\s*1fr\)\)/s);
-  assert.match(recruitCss, /\.testimonial-story-number\s*\{[^}]*grid-column:\s*span\s+1/s);
+  assert.doesNotMatch(recruitCss, /\.testimonial-story\s*\{[^}]*border-top\s*:/s);
   assert.match(recruitCss, /\.testimonial-author\s*\{[^}]*grid-column:\s*span\s+3/s);
-  assert.match(recruitCss, /\.testimonial-story-copy\s*\{[^}]*grid-column:\s*span\s+8/s);
+  assert.match(recruitCss, /\.testimonial-author-information strong\s*\{[^}]*font-size:\s*clamp\(18px,\s*1\.5vw,\s*20px\)/s);
+  assert.match(recruitCss, /\.testimonial-author-information span\s*\{[^}]*font-size:\s*clamp\(14px,\s*1\.15vw,\s*15px\)/s);
+  assert.match(recruitCss, /\.testimonial-message-shell\s*\{[^}]*grid-column:\s*span\s+9/s);
+  assert.match(recruitCss, /\.testimonial-message-shell::before\s*\{[^}]*background:\s*linear-gradient/s);
+  assert.match(recruitCss, /\.testimonial-story-copy\s*\{[^}]*background:\s*rgba\(255,\s*255,\s*255,\s*0\.96\)/s);
   assert.match(recruitCss, /\.testimonial-profile-image\s*\{[^}]*width:\s*clamp\(112px,[^,]+,\s*120px\)[^}]*aspect-ratio:\s*4\s*\/\s*5/s);
   assert.match(recruitCss, /\.testimonial-story blockquote\s*\{[^}]*font-size:\s*clamp\(38px,[^,]+,\s*48px\)/s);
   assert.match(recruitCss, /\.testimonial-story-copy\s*>\s*p\s*\{[^}]*max-width:\s*720px/s);
-  assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.testimonial-story-copy\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s);
+  assert.match(recruitCss, /@media\s*\(max-width:\s*760px\)[\s\S]*\.testimonial-message-shell\s*\{[^}]*grid-column:\s*1\s*\/\s*-1/s);
   assert.doesNotMatch(recruitCss, /\.testimonial-story\s*\{[^}]*box-shadow\s*:/s);
   assert.doesNotMatch(recruitCss, /\.testimonial-story\s*\{[^}]*background\s*:/s);
   assert.doesNotMatch(recruitCss, /\.testimonial-card/);
@@ -220,12 +225,11 @@ test("keeps recruitment visuals lightweight, responsive, and reduced-motion awar
   assert.match(testimonialsSection, /<Image[^>]*className="testimonial-profile-image"/s);
   assert.match(testimonialsSection, /testimonial\.department/);
   assert.doesNotMatch(testimonialsSection, /mainActivity/);
+  assert.doesNotMatch(testimonialsSection, /testimonial-story-number|padStart/);
   assert.ok(
-    testimonialsSection.indexOf('className="testimonial-story-number"')
-      < testimonialsSection.indexOf('className="testimonial-author"')
-      && testimonialsSection.indexOf('className="testimonial-author"')
-      < testimonialsSection.indexOf('className="testimonial-story-copy"'),
-    "testimonial document order should be number, author, then full review",
+    testimonialsSection.indexOf('className="testimonial-author"')
+      < testimonialsSection.indexOf('className="testimonial-message-shell"'),
+    "testimonial document order should be author, then message card",
   );
   assert.match(recruitPage, /\/recruit\/fox-mascots\.webp/);
   assert.match(recruitPage, /\/recruit\/apply-mascot-trio-v1\.png/);
