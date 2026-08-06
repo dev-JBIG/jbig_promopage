@@ -18,8 +18,8 @@ function TestimonialStory({ testimonial, index }: { testimonial: TestimonialItem
         ) : null}
         <div className="testimonial-author-information">
           <strong>{testimonial.name}</strong>
+          <span>{testimonial.department}</span>
           <span>{testimonial.cohort}</span>
-          <span>{testimonial.mainActivity}</span>
         </div>
       </div>
 
