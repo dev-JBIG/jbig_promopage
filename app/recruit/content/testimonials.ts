@@ -18,7 +18,7 @@ export type TestimonialItem = {
 export const testimonialItems: readonly TestimonialItem[] = [
   {
     id: "member-01",
-    name: "이정재",
+    name: "이**",
     department: "전자공학부",
     cohort: "3기",
     highlight: "다양한 사람과 연결된 성장 경험",
@@ -26,7 +26,7 @@ export const testimonialItems: readonly TestimonialItem[] = [
   },
   {
     id: "member-02",
-    name: "안중범",
+    name: "안**",
     department: "전자공학부",
     cohort: "8기",
     highlight: "다양한 데이터 분석 활동과 팀 프로젝트 경험들, 그리고 열정 넘치는 부원들까지",
@@ -34,7 +34,7 @@ export const testimonialItems: readonly TestimonialItem[] = [
   },
   {
     id: "member-03",
-    name: "박성현",
+    name: "박**",
     department: "전자공학부",
     cohort: "7기",
     highlight: "함께 배우고 성장하는 JBIG",
