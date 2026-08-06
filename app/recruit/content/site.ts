@@ -26,7 +26,7 @@ export const recruitPageContent = {
   },
   hero: {
     heading: ["호기심이", "결과가 되는 곳."],
-    subtitle: "전북대학교 데이터 분석 동아리",
+    subtitle: "",
     scrollLabel: "JBIG 더 알아보기",
   },
   about: {
