@@ -242,7 +242,7 @@
 
 .about-heading h2 {
   font-size: clamp(54px, 6.5vw, 88px);
-  justify-self: end;
+  justify-self: start;
 }
 
 .acronym-grid {
